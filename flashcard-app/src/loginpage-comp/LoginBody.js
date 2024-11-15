@@ -19,6 +19,7 @@ export function LoginBody() {
     setError("");
     console.log("Logging in with:", username, password);
     // Add login logic here
+    // for now jsut go to homepage
   };
 
   return (
