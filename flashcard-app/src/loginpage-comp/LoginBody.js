@@ -20,6 +20,7 @@ export function LoginBody() {
     console.log("Logging in with:", username, password);
     // Add login logic here
     // for now jsut go to homepage
+    window.location.href = "/homepage";
   };
 
   return (
