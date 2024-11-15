@@ -1,17 +1,14 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LoginPage } from "./pages/LoginPage.js";
+import "./pages/styles/general.css"
 
-export default function App(){
+export default function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<LoginPage />} />
-          <Route index element={<Signup />} />
-          <Route index element={<HomePage />} />
-          <Route index element={<DeckPage />} />
-          <Route index element={<PlayPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
