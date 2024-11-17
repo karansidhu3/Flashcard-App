@@ -71,7 +71,7 @@ html, body {
 }
 
 /* Deck Card Styles */
-.deck-card {
+.deck-card-hp {
   padding: 20px;
   background-color: #2c2c2c; /* Dark card background */
   border-radius: 8px;
@@ -80,21 +80,21 @@ html, body {
   cursor: pointer;
 }
 
-.deck-card:hover {
+.deck-card-hp:hover {
   transform: translateY(-4px);
   box-shadow: 0 0 10px 5px rgba(130, 9, 9, 0.8); /* Red glow effect */
   filter: brightness(1.1); /* Slight increase in brightness for better effect */
 }
 
 /* Deck Title & Description Styles */
-.deck-title {
+.deck-title-hp {
   font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 10px;
 }
 
-.deck-description {
+.deck-description-hp {
   font-size: 1rem;
   color: #cccccc; /* Light gray description text */
 }

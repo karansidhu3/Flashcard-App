@@ -1,0 +1,167 @@
+/* General deck-page styles */
+.deck-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #e2d6d6; /* Default background for casual mode */
+  transition: background-color 0.3s ease;
+}
+
+/* Study mode styles */
+.study-mode {
+  background-color: #9a96d0; /* A subtle light blue for study mode */
+}
+
+/* Header styling */
+.deck-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.deck-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.deck-description {
+  font-size: 1rem;
+  color: #3b3b3b;
+}
+
+/* Buttons container */
+.deck-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Primary Button: Play Deck */
+.play-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 250px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.play-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Grouped secondary buttons */
+.secondary-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.secondary-buttons .button {
+  width: 150px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* Individual Secondary Button Styles */
+.edit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #1e7e34;
+}
+
+.create-button {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.create-button:hover {
+  background-color: #117a8b;
+}
+
+.export-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.export-button:hover {
+  background-color: #5a6268;
+}
+
+/* Destructive Action: Delete Button */
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  width: 200px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #bd2130;
+}
+
+/* Toggle Mode Button */
+.toggle-button {
+  background-color: #ffc107;
+  color: #333;
+  width: 200px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.toggle-button:hover {
+  background-color: #e0a800;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 600px) {
+  .deck-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .play-button {
+    width: 100%;
+  }
+
+  .secondary-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .secondary-buttons .button {
+    width: 100%;
+  }
+
+  .delete-button,
+  .toggle-button {
+    width: 100%;
+  }
+}
+
