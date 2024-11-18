@@ -47,3 +47,4 @@ The process is going pretty well so far, but we need to start focusing more on b
 - **What’s not working**:
   - Backend functionality is not integrated yet (still in progress).
   - User login database needs to get connected.
+  - Due to us only being on the final steps for the backend - frontend integration, we have not been able to implement any of our functionality tests quite yet
