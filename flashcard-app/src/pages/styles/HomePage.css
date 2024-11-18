@@ -51,8 +51,11 @@ html, body {
 
 /* HomePageBody container */
 .home-page-body {
-  flex-grow: 1; /* Take up remaining space */
-  min-height: 100vh; /* Ensure it fills the viewport height */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
   padding: 70px 20px 20px; /* Added top padding for header offset */
   box-sizing: border-box;
   background-color: #1a1a1a; /* Dark background */
@@ -128,7 +131,7 @@ html, body {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .decks-container {
     grid-template-columns: 1fr 1fr; /* 2 columns */
   }

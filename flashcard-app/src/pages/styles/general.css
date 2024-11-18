@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: black;
 }
 
 /* Optional: Setting a font size and line height for better readability */
@@ -27,3 +28,5 @@ p {
   font-family: 'Inter', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
 }
+
+/* Basic reset and centering */
