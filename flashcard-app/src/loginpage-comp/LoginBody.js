@@ -19,8 +19,12 @@ export function LoginBody() {
     // Reset error and proceed with login logic
     setError("");
     console.log("Logging in with:", username, password);
-    window.location.href = "/homepage";
+    navigate("/homepage")
   };
+
+  const goToSignup = (e) => {
+    navigate("/signup")
+  }
 
   return (
     <div className="login-container">
@@ -52,12 +56,14 @@ export function LoginBody() {
         <button type="submit" className="login-button">
           Login
         </button>
-        <p
-          className="create-account-link"
-          onClick={() => navigate("/signup")} // Navigate to signup page
-        >
-          Create Account
-        </p>
+        <div className="login-footer">
+          <p>
+            Don't have an account?{" "}
+            <button className="login-link" onClick={goToSignup}>
+              Signup
+            </button>
+          </p>
+        </div>
       </form>
     </div>
   );

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { LoginHeader } from "../loginpage-comp/LoginHeader.js";
-import "./styles/LoginPage.css";
+import { useNavigate } from "react-router-dom"; // For navigation
+import "./styles/SignupPage.css";
 
 export function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // For navigation
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -24,14 +26,18 @@ export function SignupPage() {
     console.log("Signing up with:", { username, email, password });
   };
 
+  const handleLoginRedirect = () => {
+    navigate("/login"); // Redirect to login page
+  };
+
   return (
-    <div className="login-page">
+    <div className="signup-page">
       <LoginHeader />
-      <div className="login-container">
-        <form className="login-form" onSubmit={handleSignup}>
+      <div className="signup-container">
+        <form className="signup-form" onSubmit={handleSignup}>
           <h2>Sign Up</h2>
-          {error && <p className="error-message">{error}</p>}
-          <div className="input-group">
+          {error && <p className="signup-error-message">{error}</p>}
+          <div className="signup-input-group">
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -39,10 +45,10 @@ export function SignupPage() {
               placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="input-field"
+              className="signup-input-field"
             />
           </div>
-          <div className="input-group">
+          <div className="signup-input-group">
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -50,10 +56,10 @@ export function SignupPage() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input-field"
+              className="signup-input-field"
             />
           </div>
-          <div className="input-group">
+          <div className="signup-input-group">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -61,13 +67,21 @@ export function SignupPage() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
+              className="signup-input-field"
             />
           </div>
-          <button type="submit" className="login-button">
+          <button type="submit" className="signup-button">
             Create Account
           </button>
         </form>
+        <div className="signup-footer">
+          <p>
+            Have an account?{" "}
+            <button className="signup-login-link" onClick={handleLoginRedirect}>
+              Login
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
