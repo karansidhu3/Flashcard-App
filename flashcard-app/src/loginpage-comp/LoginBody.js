@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom"; // Add useNavigate
 
 export function LoginBody() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Initialize navigation
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,8 +19,6 @@ export function LoginBody() {
     // Reset error and proceed with login logic
     setError("");
     console.log("Logging in with:", username, password);
-    // Add login logic here
-    // for now jsut go to homepage
     window.location.href = "/homepage";
   };
 
@@ -53,7 +52,12 @@ export function LoginBody() {
         <button type="submit" className="login-button">
           Login
         </button>
-        <p className="forgot-password">Forgot Password?</p>
+        <p
+          className="create-account-link"
+          onClick={() => navigate("/signup")} // Navigate to signup page
+        >
+          Create Account
+        </p>
       </form>
     </div>
   );
