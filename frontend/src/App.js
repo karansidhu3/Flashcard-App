@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./pages/LoginPage.js";
-import "./pages/styles/general.css"
+import "./pages/styles/general.css";
 import { HomePage } from "./pages/HomePage.js";
 import { DeckPage } from "./pages/DeckPage.js";
 import { SignupPage } from "./pages/SignupPage.js";
+import { CreateDeckPage } from "./pages/CreateDeckPage.js"; // Import the CreateDeckPage component
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/deck/:deckId" element={<DeckPage />} />
-        <Route path="/signup" element = {<SignupPage />}/>
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/create-deck" element={<CreateDeckPage />} /> {/* Add this line */}
       </Routes>
     </BrowserRouter>
   );
