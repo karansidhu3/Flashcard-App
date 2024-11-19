@@ -1,0 +1,148 @@
+/* Basic reset and centering */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9fafb; /* Soft white-gray background for a clean feel */
+  font-family: 'Inter', sans-serif; /* Apple-like font */
+}
+
+/* Signup page container */
+.signup-page {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+  margin-top: 5%; /* Adds some space from the top */
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Title in the header */
+.signup-header {
+  margin-bottom: 30px;
+}
+
+.signup-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #28a745, #1e7e34); /* Green gradient */
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.signup-title:hover {
+  transform: scale(1.05); /* Slightly scale up the title on hover */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.signup-form {
+  width: 100%;
+}
+
+.signup-input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.signup-input-group label {
+  display: block;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.signup-input-field {
+  width: 95%; /* Make the input fields a bit smaller than the container */
+  max-width: 100%; /* Ensure they don’t exceed the container width */
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Rounded input fields */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f7f7f7; /* Subtle input background */
+  margin: 0 auto; /* Center the input fields */
+  display: block;
+}
+
+.signup-input-field:focus {
+  border-color: #28a745; /* Green border */
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.3); /* Green glow on focus */
+  background-color: white; /* Input background changes on focus */
+}
+
+.signup-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #28a745; /* Green button */
+  border: none;
+  border-radius: 12px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #1e7e34; /* Darker green on hover */
+}
+
+.signup-footer {
+  margin-top: 1rem;
+  color: #28a745; /* Green footer text */
+  font-size: 0.9rem;
+}
+
+.signup-login-link {
+  background: none;
+  color: #28a745; /* Green text */
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.signup-login-link:hover {
+  color: #1e7e34; /* Darker green on hover */
+}
+
+.signup-error-message {
+  color: #dc3545; /* Red error color for consistency */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* For larger screens */
+@media (min-width: 768px) {
+  .signup-page {
+    padding: 3rem;
+  }
+
+  .signup-title {
+    font-size: 3rem;
+  }
+}

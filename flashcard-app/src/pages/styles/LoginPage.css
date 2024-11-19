@@ -1,0 +1,151 @@
+/* LoginPage.css */
+
+/* Basic reset and centering */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f5; /* Light grey background for a soft feel */
+  font-family: 'Inter', sans-serif; /* Apple-like font */
+}
+
+/* Login page container */
+.login-page {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+  margin-top: 5%; /* Adds some space from the top */
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Title in the header */
+.login-header {
+  margin-bottom: 30px;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #007aff, #0051cc); /* Blue gradient */
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.app-title:hover {
+  transform: scale(1.05); /* Slightly scale up the title on hover */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.login-form {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.input-field {
+  width: 95%; /* Make the input fields a bit smaller than the container */
+  max-width: 100%; /* Ensure they don’t exceed the container width */
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Rounded input fields */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f7f7f7; /* Subtle input background */
+  margin: 0 auto; /* Center the input fields */
+  display: block;
+}
+
+.input-field:focus {
+  border-color: #007aff; /* Blue border */
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.3); /* Blue glow on focus */
+  background-color: white; /* Input background changes on focus */
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007aff; /* Blue button */
+  border: none;
+  border-radius: 12px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0051cc; /* Darker blue on hover */
+}
+
+.login-footer {
+  margin-top: 1rem;
+  color: #1598cb; /* Green footer text */
+  font-size: 0.9rem;
+}
+
+.login-link {
+  background: none;
+  color: #1598cb; /* Green text */
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.signup-login-link:hover {
+  color: #1e7e34; /* Darker green on hover */
+}
+
+.error-message {
+  color: #ff3b30; /* Red error color */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* For larger screens */
+@media (min-width: 768px) {
+  .login-page {
+    padding: 3rem;
+  }
+
+  .app-title {
+    font-size: 3rem;
+  }
+}
+
