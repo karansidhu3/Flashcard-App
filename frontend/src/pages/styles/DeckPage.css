@@ -1,5 +1,6 @@
 /* General deck-page styles */
 .deck-page {
+  position: relative; /* Added for positioning the Back Button */
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
@@ -17,6 +18,7 @@
 /* Header styling */
 .deck-header {
   text-align: center;
+  margin-top: 60px; /* Adjusted to prevent overlap with Back Button */
   margin-bottom: 30px;
 }
 
@@ -29,6 +31,26 @@
 .deck-description {
   font-size: 1rem;
   color: #3b3b3b;
+}
+
+/* Back Button */
+.back-button {
+  position: absolute; /* Position absolutely within deck-page */
+  top: 20px;          /* Align with the top padding */
+  left: 20px;         /* Align with the left padding */
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  z-index: 1000;      /* Ensure it stays on top */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
 }
 
 /* Buttons container */
@@ -163,5 +185,18 @@
   .toggle-button {
     width: 100%;
   }
+
+  /* Adjust Back Button for smaller screens if necessary */
+  .back-button {
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .deck-header {
+    margin-top: 50px; /* Adjusted for smaller screens */
+  }
 }
+
 

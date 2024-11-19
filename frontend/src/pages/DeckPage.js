@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom"; // Import useParams
-import "./styles/DeckPage.css"
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import "./styles/DeckPage.css";
 
 export function DeckPage() {
   const { deckId } = useParams(); // Extract deckId from the URL
+  const navigate = useNavigate(); // Initialize navigate function
   const [isStudyMode, setIsStudyMode] = useState(false);
 
   // Mock deck data (replace this with actual logic to fetch deck info)
@@ -21,8 +22,19 @@ export function DeckPage() {
     setIsStudyMode(!isStudyMode);
   };
 
+  // Handler for the Back button
+  const handleBack = () => {
+    navigate(-1); // Navigates to the previous page
+    // Alternatively, navigate('/decks') to go to a specific route
+  };
+
   return (
     <div className={`deck-page ${isStudyMode ? "study-mode" : "casual-mode"}`}>
+      {/* Back Button positioned at the top-left corner */}
+      <button className="button back-button" onClick={handleBack}>
+        &larr; Back
+      </button>
+
       <div className="deck-header">
         <h1 className="deck-title">{deck.title}</h1>
         <p className="deck-description">{deck.description}</p>
