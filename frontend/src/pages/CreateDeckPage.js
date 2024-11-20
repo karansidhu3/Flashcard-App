@@ -1,53 +1,38 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./styles/CreateDeckPage.css"; // Create a CSS file for styling
+import "./styles/CreateDeckPage.css";
 
 export function CreateDeckPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-  // Function to handle form submission
+  // For now, skip logic and focus on styling
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Simple validation
-    if (title.trim() === "") {
-      alert("Title is required!");
-      return;
-    }
-
-    // Retrieve existing decks from local storage or initialize an empty array
-    const existingDecks = JSON.parse(localStorage.getItem("decks")) || [];
-
-    // Create a new deck object
-    const newDeck = {
-      id: existingDecks.length + 1, // Simple ID assignment
-      title,
-      description,
-    };
-
-    // Update the decks array
-    const updatedDecks = [...existingDecks, newDeck];
-
-    // Save the updated decks array to local storage
-    localStorage.setItem("decks", JSON.stringify(updatedDecks));
-
-    // Redirect to Home Page
     navigate("/homepage");
   };
 
-  const handleCancel = () => {
-    navigate("/homepage");
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
-    <div className="create-deck-page">
-      <header className="create-deck-header">
-        <h1 className="create-deck-title">Create a New Deck</h1>
-      </header>
-      <div className="create-deck-body">
-        <form className="create-deck-form" onSubmit={handleSubmit}>
+    <div className="deck-page">
+      <button className="button back-button" onClick={handleBack}>
+        &larr; Back
+      </button>
+
+      <div className="deck-header">
+        <h1 className="deck-title">Create a New Deck</h1>
+        <p className="deck-description">
+          Fill out the form below to create a new deck.
+        </p>
+      </div>
+
+      <div className="deck-body">
+        <form className="deck-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="deck-title">Deck Title:</label>
             <input
@@ -72,7 +57,7 @@ export function CreateDeckPage() {
             <button type="submit" className="button create-button">
               Create Deck
             </button>
-            <button type="button" className="button cancel-button" onClick={handleCancel}>
+            <button type="button" className="button cancel-button" onClick={handleBack}>
               Cancel
             </button>
           </div>

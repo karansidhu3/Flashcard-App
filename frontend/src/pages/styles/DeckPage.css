@@ -38,7 +38,7 @@
   position: absolute; /* Position absolutely within deck-page */
   top: 20px;          /* Align with the top padding */
   left: 20px;         /* Align with the left padding */
-  background-color: #f0f0f0;
+  background-color: #464646;
   color: #333;
   border: none;
   padding: 8px 12px;
@@ -50,7 +50,7 @@
 }
 
 .back-button:hover {
-  background-color: #e0e0e0;
+  background-color: #000000;
 }
 
 /* Buttons container */
