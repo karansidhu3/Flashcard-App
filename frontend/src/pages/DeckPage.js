@@ -24,7 +24,7 @@ export function DeckPage() {
 
   // Handler for the Back button
   const handleBack = () => {
-    navigate(-1);
+    navigate('/homepage');
   };
 
   // Handler for the Create Flashcard button

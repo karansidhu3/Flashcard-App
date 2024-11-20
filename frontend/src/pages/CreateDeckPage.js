@@ -11,7 +11,7 @@ export function CreateDeckPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/homepage");
+    navigate("/deck/:deckId/create-flashcard");
   };
 
   const handleBack = () => {
