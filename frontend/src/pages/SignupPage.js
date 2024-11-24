@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom"; // For navigation
 import "./styles/SignupPage.css";
 
 export function handleSignup(username, email, password) {
-  
+  return !!(username && email && password); // Returns true if all fields are non-empty
 }
+
 
 export function SignupPage() {
   const [username, setUsername] = useState("");
