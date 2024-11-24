@@ -36,8 +36,9 @@ export function SignupPage() {
 
     // Show Chrome popup message
     alert("Account created successfully! (TODO: Implement backend)");
+    // send info to backend
 
-    console.log("Signing up with:", { username, email, password });
+    navigate('/homepage');
   };
 
   const handleLoginRedirect = () => {
