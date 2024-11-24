@@ -3,6 +3,10 @@ import { LoginHeader } from "../loginpage-comp/LoginHeader.js";
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./styles/SignupPage.css";
 
+export function handleSignup(username, email, password) {
+  
+}
+
 export function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
