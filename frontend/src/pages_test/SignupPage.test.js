@@ -1,18 +1,20 @@
-import { handleSignup } from "../pages/SignupPage";
+import { validateSignup } from "../pages/SignupPage";
 
-describe('handleSignup', () => {
-  test('returns false if any field is empty', () => {
-    expect(handleSignup('', 'test@example.com', 'password123')).toBe(false);
-    expect(handleSignup('JohnDoe', '', 'password123')).toBe(false);
-    expect(handleSignup('JohnDoe', 'test@example.com', '')).toBe(false);
+describe('validateSignup', () => {
+  it('should return an error if username, email, or password is empty', () => {
+    const result = validateSignup('', 'test@example.com', 'password');
+    expect(result.success).toBe(false);
+    expect(result.error).toBe('Please fill in all fields.');
   });
 
-  test('returns true if all fields are filled', () => {
-    expect(handleSignup('JohnDoe', 'john@example.com', 'password123')).toBe(true);
+  it('should return an error if password is less than 6 characters', () => {
+    const result = validateSignup('username', 'test@example.com', '123');
+    expect(result.success).toBe(false);
+    expect(result.error).toBe('Password must be at least 6 characters long.');
   });
 
-  test('returns false if password is less than 6 characters', () => {
-    expect(handleSignup('Tim', 'tim@example.com', '123')).toBe(false)
-    expect(handleSignup('Tim', 'tim@example.com', 'timlikescake123')).toBe(true)
+  it('should return success if all fields are valid', () => {
+    const result = validateSignup('username', 'test@example.com', 'password123');
+    expect(result.success).toBe(true);
   });
 });

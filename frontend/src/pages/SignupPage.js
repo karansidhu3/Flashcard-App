@@ -3,16 +3,15 @@ import { LoginHeader } from "../loginpage-comp/LoginHeader.js";
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./styles/SignupPage.css";
 
-export function handleSignup(username, email, password) {
-  if (!username || !email || !password){
-    return false;
+export function validateSignup(username, email, password) {
+  if (!username || !email || !password) {
+    return { success: false, error: "Please fill in all fields." };
   }
-  else if (password.length < 6){
-    return false;
+  else if (password.length < 6) {
+    return { success: false, error: "Password must be at least 6 characters long." };
   }
 
-  return true;
-
+  return { success: true };
 }
 
 
@@ -26,8 +25,10 @@ export function SignupPage() {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("Please fill in all fields.");
+    const result = validateSignup(username, email, password);
+
+    if (!result.success) {
+      setError(result.error);
       return;
     }
 
