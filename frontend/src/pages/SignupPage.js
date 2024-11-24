@@ -10,7 +10,7 @@ export function SignupPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate(); // For navigation
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     if (!username || !email || !password) {
@@ -20,10 +20,25 @@ export function SignupPage() {
 
     setError("");
 
-    // Show Chrome popup message
-    alert("Account created successfully! (TODO: Implement backend)");
+    try {
+      const response = await fetch('http://localhost:5000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
 
-    console.log("Signing up with:", { username, email, password });
+      if (response.ok) {
+        alert('Signup successful!');
+        navigate('/login'); // Redirect to login page after successful signup
+      } else {
+        alert('Signup failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
   };
 
   const handleLoginRedirect = () => {
