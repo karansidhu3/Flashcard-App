@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import "./styles/DeckPage.css";
 
 export function DeckPage() {
-  const { deckId } = useParams(); // Extract deckId from the URL
-  const navigate = useNavigate(); // Initialize navigate function
+  const { deckId } = useParams();
+  const navigate = useNavigate();
   const [isStudyMode, setIsStudyMode] = useState(false);
 
   // Mock deck data (replace this with actual logic to fetch deck info)
@@ -24,8 +24,12 @@ export function DeckPage() {
 
   // Handler for the Back button
   const handleBack = () => {
-    navigate(-1); // Navigates to the previous page
-    // Alternatively, navigate('/decks') to go to a specific route
+    navigate('/homepage');
+  };
+
+  // Handler for the Create Flashcard button
+  const handleCreateFlashcard = () => {
+    navigate(`/deck/${deckId}/create-flashcard`);
   };
 
   return (
@@ -46,7 +50,9 @@ export function DeckPage() {
         {/* Grouped Actions */}
         <div className="secondary-buttons">
           <button className="button edit-button">Edit Flashcards</button>
-          <button className="button create-button">Create Flashcard</button>
+          <button className="button create-button" onClick={handleCreateFlashcard}>
+            Create Flashcard
+          </button>
           <button className="button export-button">Export Deck</button>
         </div>
 

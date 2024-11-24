@@ -1,0 +1,153 @@
+/* General deck-page styles */
+.deck-page {
+    position: relative;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #e2d6d6;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Header styling */
+  .deck-header {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+  
+  .deck-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .deck-description {
+    font-size: 1rem;
+    color: #3b3b3b;
+  }
+  
+  /* Back Button */
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #464646;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .back-button:hover {
+    background-color: #000000;
+  }
+  
+  /* Deck Body */
+  .deck-body {
+    margin-top: 20px;
+  }
+  
+  /* Form Styling */
+  .deck-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  /* Button Styles */
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  /* Create Button */
+  .create-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .create-button:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+  }
+  
+  /* Cancel Button */
+  .cancel-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .cancel-button:hover {
+    background-color: #bd2130;
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive Styling */
+  @media screen and (max-width: 600px) {
+    .deck-page {
+      padding: 15px;
+    }
+  
+    .back-button {
+      top: 10px;
+      left: 10px;
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+  
+    .deck-header {
+      margin-top: 50px;
+    }
+  
+    .form-buttons {
+      flex-direction: column;
+    }
+  
+    .form-buttons .button {
+      width: 100%;
+    }
+  }
+  
