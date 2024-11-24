@@ -4,7 +4,15 @@ import { useNavigate } from "react-router-dom"; // For navigation
 import "./styles/SignupPage.css";
 
 export function handleSignup(username, email, password) {
-  return !!(username && email && password); // Returns true if all fields are non-empty
+  if (!username || !email || !password){
+    return false;
+  }
+  else if (password.length < 6){
+    return false;
+  }
+
+  return true;
+
 }
 
 
