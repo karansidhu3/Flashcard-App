@@ -3,6 +3,18 @@ import { LoginHeader } from "../loginpage-comp/LoginHeader.js";
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./styles/SignupPage.css";
 
+export function validateSignup(username, email, password) {
+  if (!username || !email || !password) {
+    return { success: false, error: "Please fill in all fields." };
+  }
+  else if (password.length < 6) {
+    return { success: false, error: "Password must be at least 6 characters long." };
+  }
+
+  return { success: true };
+}
+
+
 export function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,8 +25,10 @@ export function SignupPage() {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("Please fill in all fields.");
+    const result = validateSignup(username, email, password);
+
+    if (!result.success) {
+      setError(result.error);
       return;
     }
 
@@ -22,8 +36,9 @@ export function SignupPage() {
 
     // Show Chrome popup message
     alert("Account created successfully! (TODO: Implement backend)");
+    // send info to backend
 
-    console.log("Signing up with:", { username, email, password });
+    navigate('/homepage');
   };
 
   const handleLoginRedirect = () => {
