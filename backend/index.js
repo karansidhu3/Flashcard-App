@@ -9,13 +9,13 @@ const PORT = 5000;
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json()); // For parsing application/json
 
-// Database Configuration
+// Database Configuration for connecting to the database
 const db = new Pool({
-  user: 'user',               // Matches POSTGRES_USER in Docker Compose
-  host: 'db',                 // Matches the service name in Docker Compose (db)
-  database: 'mydb',           // Matches POSTGRES_DB in Docker Compose
-  password: 'password',       // Matches POSTGRES_PASSWORD in Docker Compose
-  port: 5432,                 // Default Postgres port
+  user: 'user',               
+  host: 'db',                 
+  database: 'mydb',           
+  password: 'password',       
+  port: 5432,                 
 });
 
 // Routes
