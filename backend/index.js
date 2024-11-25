@@ -38,8 +38,7 @@ app.post('/api/login', async (req, res) => {
 
     const { user_id, password_hash } = result.rows[0];
 
-    // Compare the provided password with the stored hashed password
-    const isMatch = await bcrypt.compare(password, password_hash);
+    const isMatch = password === password_hash;
 
     if (isMatch) {
       // If passwords match, authentication is successful
