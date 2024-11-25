@@ -7,7 +7,7 @@ export function LoginBody() {
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize navigation
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -16,10 +16,32 @@ export function LoginBody() {
       return;
     }
 
-    // Reset error and proceed with login logic
     setError("");
-    console.log("Logging in with:", username, password);
-    navigate("/homepage")
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST', // Matches the backend's POST route
+        headers: {
+          'Content-Type': 'application/json', // Ensure JSON data is sent
+        },
+        body: JSON.stringify({ username, password }), // Send email and password
+      });
+
+      if (response.ok) {
+        const data = await response.json(); // Parse the response JSON
+        alert('Login successful!');
+        console.log('User ID:', data.userId); // Optional: log the user ID
+        navigate('/homepage'); // Redirect to a protected route, e.g., '/dashboard'
+      } else {
+        const errorMessage = await response.text();
+        alert(`Login failed: ${errorMessage}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    }
+    
+    
   };
 
   const goToSignup = (e) => {
