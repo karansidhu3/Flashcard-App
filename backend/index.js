@@ -32,8 +32,12 @@ app.post('/signup', async (req, res) => {
   }
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const query = 'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)';
     await db.query(query, [username, email, password]);
+
+
     res.status(201).send('User created successfully');
   } catch (error) {
     console.error('Database Error:', error);
