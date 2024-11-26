@@ -4,6 +4,9 @@ import { LoginHeader } from "../loginpage-comp/LoginHeader.js";
 import "./styles/LoginPage.css"
 
 export function LoginPage() {
+
+  localStorage.clear();
+
   return (
     <div className="login-page">
       <LoginHeader />
