@@ -18,6 +18,9 @@
   - Karan
 - **Page Protection**
   - **Karan** *(Primary)*
+- **Navigation/Select Deck**
+   - **Karan** *(Primary)*
+  
 
 #### Burndown Chart
 ![Burndown Chart](burndown-M5.png)
