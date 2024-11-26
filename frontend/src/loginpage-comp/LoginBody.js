@@ -28,17 +28,24 @@ export function LoginBody() {
       });
 
       if (response.ok) {
-        const data = await response.json(); // Parse the response JSON
-        alert('Login successful!');
-        console.log('User ID:', data.userId); // Optional: log the user ID
-        navigate('/homepage'); // Redirect to a protected route, e.g., '/dashboard'
+        const data = await response.json();
+
+        if (data.success) {
+          // Store userId in localStorage
+          localStorage.setItem('userId', data.userId);
+  
+          // Redirect to the homepage
+          navigate("/homepage");
+        } else {
+          setError("Invalid credentials. Please try again.");
+        }
       } else {
         const errorMessage = await response.text();
-        alert(`Login failed: ${errorMessage}`);
+        setError(`Login failed: ${errorMessage}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      setError('An error occurred. Please try again later.');
     }
     
     
