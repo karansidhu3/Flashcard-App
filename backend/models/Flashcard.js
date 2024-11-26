@@ -1,7 +1,8 @@
 
-const { v4: uuidv4 } = require('uuid'); // For generating unique IDs
+import { application } from 'express';
+import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
 
-class Flashcard extends Flashcard {
+class Flashcard{
   /**
    * Constructs a new TextFlashcard instance.
    * @param {Object} params - Parameters for the flashcard.
@@ -35,4 +36,4 @@ class Flashcard extends Flashcard {
   }
 }
 
-module.exports = Flashcard;
+module.exports = application;

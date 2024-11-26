@@ -1,3 +1,5 @@
+const Flashcard = require('../models/Flashcard'); // Assuming Flashcard is in the same directory
+
 const FlashcardFactory = {
     /**
      * Creates a new Flashcard instance.
@@ -9,12 +11,12 @@ const FlashcardFactory = {
      * @returns {Flashcard} A new Flashcard instance.
      */
     createFlashcard({ question, answer, deckId = null, flashcardId = null }) {
-      return new Flashcard({
-        question,
-        answer,
-        deckId,
-        flashcardId,
-      });
+        return new Flashcard({
+            question,
+            answer,
+            deckId,
+            flashcardId,
+        });
     },
 };
 
