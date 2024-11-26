@@ -6,14 +6,12 @@ import "./styles/SignupPage.css";
 export function validateSignup(username, email, password) {
   if (!username || !email || !password) {
     return { success: false, error: "Please fill in all fields." };
-  }
-  else if (password.length < 6) {
+  } else if (password.length < 6) {
     return { success: false, error: "Password must be at least 6 characters long." };
   }
 
   return { success: true };
 }
-
 
 export function SignupPage() {
   const [username, setUsername] = useState("");
@@ -22,23 +20,41 @@ export function SignupPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate(); // For navigation
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
+    // Validate signup input
     const result = validateSignup(username, email, password);
 
+    // If validation fails, display error and stop further processing
     if (!result.success) {
       setError(result.error);
       return;
     }
 
+    // Clear error message if validation passes
     setError("");
 
-    // Show Chrome popup message
-    alert("Account created successfully! (TODO: Implement backend)");
-    // send info to backend
+    // Proceed with sending the data to the backend only if validation passes
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
 
-    navigate('/homepage');
+      if (response.ok) {
+        alert('Signup successful!');
+        navigate('/login'); // Redirect to login page after successful signup
+      } else {
+        alert('Signup failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
   };
 
   const handleLoginRedirect = () => {
@@ -61,6 +77,7 @@ export function SignupPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="signup-input-field"
+              required
             />
           </div>
           <div className="signup-input-group">
@@ -72,6 +89,7 @@ export function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="signup-input-field"
+              required
             />
           </div>
           <div className="signup-input-group">
@@ -83,6 +101,8 @@ export function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="signup-input-field"
+              minLength="6"
+              required
             />
           </div>
           <button type="submit" className="signup-button">
