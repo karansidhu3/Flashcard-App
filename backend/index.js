@@ -65,4 +65,23 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-module.exports = app; // Export the app for testing
+app.post('/api/deck/:deckId/create-flashcard', async (req, res) => {
+  const { question, answer } = req.body; 
+  const { deckId } = req.params; 
+
+  if (!question || !answer) {
+    return res.status(400).json({ error: "Question and answer are required." });
+  }
+
+  try {
+    // Pass the deckId from the route parameter along with question and answer
+    const newFlashcard = await FlashcardFactory.createAndSaveFlashcard({ question, answer, deckId });
+    res.status(201).json(newFlashcard);
+  } catch (error) {
+    console.error('Error creating flashcard:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+module.exports = app; 
