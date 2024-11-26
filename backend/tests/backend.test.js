@@ -128,3 +128,39 @@ describe('Load Users Decks API Tests', () => {
   });
 });
 
+//Tests for creating a deck
+describe('Create Deck API Tests', () => {
+  it('should create a new deck with valid data', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce(); // Simulate successful deck creation
+
+    const response = await request(app)
+      .post('/api/create-deck')
+      .send({ user_id: 123, deck_name: 'New Deck' });
+
+    expect(response.status).toBe(201); // Created
+    expect(response.text).toBe('Deck created successfully'); // Success message check
+  });
+
+  it('should return 400 for missing fields', async () => {
+    const response = await request(app)
+      .post('/api/create-deck')
+      .send({ deck_name: 'Incomplete Deck' }); // Missing user_id
+
+    expect(response.status).toBe(400); // Bad Request
+    expect(response.text).toBe('User ID and deck name are required'); // Validation error message
+  });
+
+  it('should handle database errors gracefully', async () => {
+    const mClient = new Pool();
+    mClient.query.mockRejectedValueOnce(new Error('Database Error')); // Simulate DB error
+
+    const response = await request(app)
+      .post('/api/create-deck')
+      .send({ user_id: 123, deck_name: 'Error Deck' });
+
+    expect(response.status).toBe(500); // Internal Server Error
+    expect(response.text).toBe('Error occurred while creating deck'); // Proper error message
+  });
+});
+
