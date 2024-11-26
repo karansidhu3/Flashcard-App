@@ -65,4 +65,10 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
+app.post('/api/getDecks', async (req, res) => {
+  const userId = req.body;
+
+  
+});
+
 module.exports = app; // Export the app for testing
