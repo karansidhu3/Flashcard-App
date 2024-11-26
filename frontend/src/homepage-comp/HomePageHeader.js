@@ -6,7 +6,8 @@ export default function HomePageHeader() {
 
   const handleLogout = () => {
     // For now, just navigate back to the login page when the user logs out
-    navigate("/login");
+    localStorage.removeItem('userId');
+    navigate("/");
   };
 
   return (

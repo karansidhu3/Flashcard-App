@@ -42,7 +42,7 @@ export function SignupPage() {
   };
 
   const handleLoginRedirect = () => {
-    navigate("/login"); // Redirect to login page
+    navigate("/"); // Redirect to login page
   };
 
   return (
