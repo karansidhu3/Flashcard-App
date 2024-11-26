@@ -19,6 +19,9 @@
 - **Page Protection**
   - **Karan** *(Primary)*
 
+#### Burndown Chart
+![Burndown Chart](burndown-M5.png)
+
 ---
 
 ## Summary
