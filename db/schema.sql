@@ -11,6 +11,7 @@ CREATE TABLE users (
 CREATE TABLE decks (
     deck_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
+    description TEXT NOT NULL,
     deck_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
@@ -33,23 +34,23 @@ VALUES
 ('Ian', 'ian@mail.com', 'testing2'),
 ('Liam', 'liam@mail.com', 'testing3');
 
--- Insert Decks for Each User
-INSERT INTO decks (user_id, deck_name)
+-- Insert Decks for Each User with Descriptions
+INSERT INTO decks (user_id, deck_name, description)
 VALUES 
 -- User 1's Decks
-(1, 'Math Deck 1'),
-(1, 'Science Deck 2'),
-(1, 'History Deck 3'),
+(1, 'Math Deck 1', 'A collection of math problems and solutions for review.'),
+(1, 'Science Deck 2', 'Flashcards about basic science concepts and facts.'),
+(1, 'History Deck 3', 'Historical events and key figures, organized by topic.'),
 
 -- User 2's Decks
-(2, 'Geography Deck 1'),
-(2, 'Literature Deck 2'),
-(2, 'Physics Deck 3'),
+(2, 'Geography Deck 1', 'Geographical locations, features, and world capitals.'),
+(2, 'Literature Deck 2', 'Flashcards covering famous works of literature and authors.'),
+(2, 'Physics Deck 3', 'Important physics concepts, laws, and key definitions.'),
 
 -- User 3's Decks
-(3, 'Art Deck 1'),
-(3, 'Programming Deck 2'),
-(3, 'Sports Deck 3');
+(3, 'Art Deck 1', 'Art movements, famous artists, and their works.'),
+(3, 'Programming Deck 2', 'Programming concepts, syntax, and coding techniques.'),
+(3, 'Sports Deck 3', 'Sports trivia, rules, and major tournaments.');
 
 -- Insert Flashcards for Each Deck
 -- User 1's Decks
