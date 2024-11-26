@@ -7,11 +7,49 @@ export function CreateDeckPage() {
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-  // For now, skip logic and focus on styling
+  // Retrieve user ID from local storage
+  const user_id = localStorage.getItem("userId");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/deck/:deckId/create-flashcard");
+
+    // Check if user_id is available
+    if (!user_id) {
+      alert("User not logged in.");
+      return;
+    }
+
+    // Create a deck object with necessary fields
+    const deckData = {
+      user_id: user_id, // Use the user ID from local storage
+      deck_name: title,
+      description: description,
+    };
+
+    try {
+      const response = await fetch("/api/create-deck", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(deckData),
+      });
+
+      if (response.status === 201) {
+        const result = await response.json();
+        console.log(result.message);
+
+        // Navigate to the flashcard creation page for the newly created deck
+        navigate(`/deck/${result.deck_id}/create-flashcard`);
+      } else {
+        const errorMessage = await response.text();
+        console.error("Failed to create deck:", errorMessage);
+        alert("Failed to create deck: " + errorMessage);
+      }
+    } catch (error) {
+      console.error("Error while creating deck:", error);
+      alert("An error occurred while creating the deck. Please try again.");
+    }
   };
 
   const handleBack = () => {
