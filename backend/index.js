@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg'); // PostgreSQL client
 const app = express();
-const PORT = 5000;
+const PORT = 6000;
 
 // Middleware
 app.use(cors()); // Enable CORS for all routes
@@ -23,7 +23,7 @@ app.get('/api/message', (req, res) => {
   res.json({ message: 'Hello from the Backend!' });
 });
 
-app.post('/signup', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {

@@ -37,7 +37,7 @@ export function SignupPage() {
 
     // Proceed with sending the data to the backend only if validation passes
     try {
-      const response = await fetch('http://localhost:5000/signup', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
