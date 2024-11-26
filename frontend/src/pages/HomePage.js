@@ -5,11 +5,6 @@ import "./styles/HomePage.css";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export function HomePage() {
-  const decks = [
-    { id: 1, title: "Java Basics", description: "Flashcards for Java concepts" },
-    { id: 2, title: "React Essentials", description: "React components and hooks" },
-  ];
-
   const navigate = useNavigate(); // Initialize navigate
 
   const handleCreateDeck = () => {
@@ -19,7 +14,7 @@ export function HomePage() {
   return (
     <div>
       <HomePageHeader />
-      <HomePageBody decks={decks} onCreateDeck={handleCreateDeck} />
+      <HomePageBody onCreateDeck={handleCreateDeck} />
     </div>
   );
 }
