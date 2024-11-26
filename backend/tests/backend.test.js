@@ -11,6 +11,8 @@ jest.mock('pg', () => {
 });
 
 describe('Backend API Tests', () => {
+
+  //Test for sending invalid login credentals 
   it('should fail login with invalid credentials', async () => {
     const mClient = new Pool();
     mClient.query.mockResolvedValueOnce({ rows: [] }); // Simulate no user found
@@ -23,6 +25,7 @@ describe('Backend API Tests', () => {
     expect(response.text).toBe('Invalid email or password'); // Error message check
   });
 
+  //test for sending valid login credentals 
   it('should succeed with valid credentials', async () => {
     const mClient = new Pool();
     mClient.query.mockResolvedValueOnce({
@@ -36,4 +39,6 @@ describe('Backend API Tests', () => {
     expect(response.status).toBe(200); // Success
     expect(response.body.success).toBe(true);
   });
+
+  
 });
