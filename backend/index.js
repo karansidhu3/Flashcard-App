@@ -89,4 +89,26 @@ app.post('/api/get-decks', async (req, res) => {
   }
 });
 
+// post to create a new deck
+app.post('/api/create-deck', async (req, res) => {
+  const { user_id, deck_name, description } = req.body;
+
+  // Validate input
+  if (!user_id || !deck_name) {
+    return res.status(400).send('User ID and deck name are required');
+  }
+
+  try {
+    // Insert the new deck into the database, including the description
+    const query = 'INSERT INTO decks (user_id, deck_name, description) VALUES ($1, $2, $3)';
+    await db.query(query, [user_id, deck_name, description]);
+
+    // Respond with success
+    res.status(201).send('Deck created successfully');
+  } catch (error) {
+    console.error('Database Error:', error);
+    res.status(500).send('Error occurred while creating deck');
+  }
+});
+
 module.exports = app; // Export the app for testing
