@@ -1,9 +1,11 @@
-/* Global styles */
+/* Global Styles */
 html, body {
   height: 100%;
+  justify-content: none;
   margin: 0;
-  background-color: #1a1a1a; /* Set dark background for the entire page */
-  font-family: Arial, sans-serif; /* Optional: Add default font */
+  background-color: #f4f4f7; /* Light, soft background color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Apple's system font stack */
+  color: #333; /* Dark gray text */
 }
 
 /* Master container to ensure everything inside takes up full page */
@@ -11,98 +13,100 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: #f4f4f7;
 }
 
 /* HomePageHeader styling */
 .home-page-header {
   display: flex;
-  justify-content: space-between; /* Space out the title and button */
+  justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: #333; /* Dark background for header */
-  color: #fff;
+  padding: 20px 30px;
+  background-color: #ffffff; /* Light background for header */
+  color: #333; /* Dark text for header */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10; /* Keep it above other content */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  z-index: 10;
 }
 
 .home-page-title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 600;
+  color: #333;
 }
 
 .logout-button {
   padding: 8px 16px;
   font-size: 1rem;
-  color: white;
-  background-color: #ff4d4d; /* Red background for logout */
+  color: #ffffff;
+  background-color: #ff4d4d; /* Apple-style red */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Slightly rounded corners for softness */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .logout-button:hover {
-  background-color: #ff1a1a; /* Darker red on hover */
+  background-color: #ff3b3b; /* Slightly darker red on hover */
   transform: scale(1.05);
 }
 
 /* HomePageBody container */
 .home-page-body {
-  flex-grow: 1; /* Take up remaining space */
-  min-height: 100vh; /* Ensure it fills the viewport height */
-  padding: 70px 20px 20px; /* Added top padding for header offset */
-  box-sizing: border-box;
-  background-color: #1a1a1a; /* Dark background */
-  color: #e0e0e0;
+  flex-grow: 1;
+  min-height: 100vh;
+  padding: 220px 20px 20px; /* Adjust for fixed header */
+  background-color: #f4f4f7;
+  color: #333;
 }
 
 /* Decks container grid layout */
 .decks-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* Default 3 columns */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid with auto-fill */
   gap: 20px;
   max-width: 1200px;
   margin-top: 60px;
-  width: 100%; /* Ensure it takes the full width */
-  box-sizing: border-box; /* Prevent overflow */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Deck Card Styles */
 .deck-card-hp {
   padding: 20px;
-  background-color: #2c2c2c; /* Dark card background */
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  background-color: #ffffff; /* White card background */
+  border-radius: 12px; /* Round corners for a soft look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for subtle depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .deck-card-hp:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 10px 5px rgba(130, 9, 9, 0.8); /* Red glow effect */
-  filter: brightness(1.1); /* Slight increase in brightness for better effect */
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
 /* Deck Title & Description Styles */
 .deck-title-hp {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #333;
   margin-bottom: 10px;
 }
 
 .deck-description-hp {
   font-size: 1rem;
-  color: #cccccc; /* Light gray description text */
+  color: #666; /* Lighter gray for description text */
+  line-height: 1.5;
 }
 
 /* No decks available message */
 .no-decks {
   font-size: 1.2rem;
-  color: #bbbbbb;
+  color: #999; /* Softer gray for empty state */
 }
 
 /* Create Deck button Styles */
@@ -112,25 +116,25 @@ html, body {
   right: 20px;
   padding: 12px 24px;
   font-size: 1rem;
-  color: white;
-  background-color: #333333;
+  color: #ffffff;
+  background-color: #007aff; /* iOS-style blue button */
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .create-deck-button:hover {
-  background-color: #444444;
+  background-color: #0051a8; /* Slightly darker blue on hover */
   transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .decks-container {
-    grid-template-columns: 1fr 1fr; /* 2 columns */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Auto adjust columns */
   }
 
   .create-deck-button {
@@ -141,6 +145,6 @@ html, body {
 
 @media (max-width: 480px) {
   .decks-container {
-    grid-template-columns: 1fr; /* 1 column */
+    grid-template-columns: 1fr; /* Single column layout */
   }
 }

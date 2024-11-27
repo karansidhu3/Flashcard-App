@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
-export function HomePageBody({ decks, onCreateDeck }) {
+
+export function HomePageBody({ onCreateDeck }) {
   const navigate = useNavigate(); // Initialize navigate
+  const userId = localStorage.getItem("userId");
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/get-decks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: userId }),
+    })
+      .then((res) => res.json())
+      .then((data) => setDecks(data))
+      .catch((err) => console.error("Failed to load decks", err));
+  }, [userId]);
+  // change jsx to loop through all the decks and print them on the screen in the format provided.
+  // if no decks, show a message that says 'you have no decks'
+
 
   const handleDeckClick = (deckId) => {
     navigate(`/deck/${deckId}`); // Navigate to the specific deck page
@@ -14,12 +31,11 @@ export function HomePageBody({ decks, onCreateDeck }) {
         {decks.length > 0 ? (
           decks.map((deck) => (
             <div
-              key={deck.id}
+              key={deck.deck_id}
               className="deck-card-hp"
-              onClick={() => handleDeckClick(deck.id)} // Attach click handler
+              onClick={() => handleDeckClick(deck.deck_id)} // Attach click handler
             >
-              <h3 className="deck-title-hp">{deck.title}</h3>
-              <p className="deck-description-hp">{deck.description}</p>
+              <h3 className="deck-title-hp">{deck.deck_name}</h3>
             </div>
           ))
         ) : (

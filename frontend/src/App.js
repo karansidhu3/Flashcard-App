@@ -7,18 +7,18 @@ import { DeckPage } from "./pages/DeckPage.js";
 import { SignupPage } from "./pages/SignupPage.js";
 import { CreateDeckPage } from "./pages/CreateDeckPage.js";
 import CreateFlashcardPage from "./pages/CreateFlashcardPage.js"; // Import the new component
+import { ProtectedRoute } from "./components/ProtectedRoute.js";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/homepage" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/deck/:deckId" element={<DeckPage />} />
+        <Route path="/homepage" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+        <Route path="/deck/:deckId" element={<ProtectedRoute><DeckPage /></ProtectedRoute>} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/create-deck" element={<CreateDeckPage />} />
-        <Route path="/deck/:deck_id/create-flashcard" element={<CreateFlashcardPage />} /> {/* New Route */}
+        <Route path="/create-deck" element={<ProtectedRoute><CreateDeckPage /></ProtectedRoute>} />
+        <Route path="/deck/:deckId/create-flashcard" element={<ProtectedRoute><CreateFlashcardPage /></ProtectedRoute>} /> {/* New Route */}
       </Routes>
     </BrowserRouter>
   );

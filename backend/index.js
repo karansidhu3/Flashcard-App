@@ -65,7 +65,6 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-
 app.post('/api/deck/:deck_id/create-flashcard', async (req, res) => {
   const { deck_id } = req.params; // Extract deck_id from URL
   const { question, answer } = req.body; // Extract question and answer from the request body
@@ -131,9 +130,28 @@ app.post('/api/deck/:deck_id/create-flashcard', async (req, res) => {
   }
 });
 
+app.post('/api/get-decks', async (req, res) => {
+  try {
+    const { user_id } = req.body;
 
+    // Validate input
+    if (!user_id) {
+      return res.status(400).send('User ID is required');
+    }
 
+    // Query the database for the user's decks
+    const result = await db.query('SELECT * FROM decks WHERE user_id = $1', [user_id]);
 
+    if (result.rows.length === 0) {
+      return res.status(404).send('No decks found for the user');
+    }
 
+    // Return the decks
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error retrieving decks:', err);
+    res.status(500).send('Error occurred while retrieving decks');
+  }
+});
 
-module.exports = app; 
+module.exports = app; // Export the app for testing
