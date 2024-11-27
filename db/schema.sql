@@ -22,6 +22,7 @@ CREATE TABLE flashcards (
     deck_id INT NOT NULL,
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
+    is_known BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id) ON DELETE CASCADE
 );
