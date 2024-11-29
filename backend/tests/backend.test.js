@@ -169,3 +169,59 @@ describe('Create Deck API Tests', () => {
   });
 });
 
+//tests for getting the contents of a sepcific selected deck
+describe('Get Deck API Tests', () => {
+  it('should return the deck details for a valid deck_id', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({
+      rows: [
+        { deck_id: 1, deck_name: 'Java Basics', description: 'Flashcards for Java concepts', user_id: 123 },
+      ],
+    });
+
+    const response = await request(app)
+      .post('/api/get-deck')
+      .send({ deck_id: 1 });
+
+    expect(response.status).toBe(200); // Success
+    expect(response.body).toEqual({
+      deck_id: 1,
+      deck_name: 'Java Basics',
+      description: 'Flashcards for Java concepts',
+      user_id: 123,
+    }); // Exact deck data
+  });
+
+  it('should return 404 if the deck is not found', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({ rows: [] }); // No deck found
+
+    const response = await request(app)
+      .post('/api/get-deck')
+      .send({ deck_id: 999 });
+
+    expect(response.status).toBe(404); // Not Found
+    expect(response.body).toEqual({ error: 'Deck not found' }); // Proper error message
+  });
+
+  it('should return 400 for missing deck_id', async () => {
+    const response = await request(app)
+      .post('/api/get-deck')
+      .send({}); // No deck_id provided
+
+    expect(response.status).toBe(400); // Bad Request
+    expect(response.body).toEqual({ error: 'deck_id is required' }); // Validation error
+  });
+
+  it('should handle database errors gracefully', async () => {
+    const mClient = new Pool();
+    mClient.query.mockRejectedValueOnce(new Error('Database Error')); // Simulate DB error
+
+    const response = await request(app)
+      .post('/api/get-deck')
+      .send({ deck_id: 1 });
+
+    expect(response.status).toBe(500); // Internal Server Error
+    expect(response.body).toEqual({ error: 'An error occurred while retrieving the deck' }); // Proper error message
+  });
+});

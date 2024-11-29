@@ -176,4 +176,30 @@ app.post('/api/create-deck', async (req, res) => {
   }
 });
 
+//post to get specific decks infromaton based on id
+app.post('/api/get-deck', async (req, res) => {
+  const { deck_id } = req.body;
+
+  // Validate input
+  if (!deck_id) {
+    return res.status(400).json({ error: 'deck_id is required' });
+  }
+
+  try {
+    // Query the database for the specific deck
+    const query = 'SELECT * FROM decks WHERE deck_id = $1';
+    const result = await db.query(query, [deck_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Deck not found' });
+    }
+
+    // Return the deck details
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching deck:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving the deck' });
+  }
+});
+
 module.exports = app; // Export the app for testing
