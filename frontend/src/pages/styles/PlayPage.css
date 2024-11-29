@@ -1,0 +1,155 @@
+/* General Container Styling */
+.play-page-container {
+  max-width: 600px;
+  min-width: 500px;
+  margin: 50px auto; /* Center-align the container horizontally */
+  padding: 30px;
+  background: linear-gradient(135deg, #f0f9ff, #cfe9ff);
+  border-radius: 16px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #333333;
+}
+
+/* Header */
+.play-page-header {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0066cc;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #80d4ff;
+  padding-bottom: 10px;
+}
+
+/* Flashcard Container */
+.known-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.flashcard-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff8f0, #ffe8d0);
+  border: 2px solid #ffc8a0;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flashcard-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 160, 120, 0.3);
+}
+
+/* Flashcard Text */
+.flashcard-answer {
+  font-size: 1.6rem;
+  color: #dd6e42;
+  font-weight: 500;
+}
+
+.flashcard-question{
+  font-size: 1.6rem;
+  color: #dd42c1;
+  font-weight: 500;
+}
+
+
+/* Buttons Container */
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 15px; /* Keeps consistent spacing between buttons */
+  margin-top: 20px;
+}
+
+/* Buttons */
+.button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Button Variants */
+.button-primary {
+  background: linear-gradient(135deg, #6a95ff, #4a80ff);
+  color: white;
+}
+
+.button-primary:hover {
+  background: linear-gradient(135deg, #3a6edc, #205acc);
+}
+
+.button-secondary {
+  background: linear-gradient(135deg, #f78da7, #ff5277);
+  color: white;
+}
+
+.button-secondary:hover {
+  background: linear-gradient(135deg, #db5371, #c24562);
+}
+
+.button-success {
+  background: linear-gradient(135deg, #42db70, #22b74f);
+  color: white;
+}
+
+.button-success:hover {
+  background: linear-gradient(135deg, #33b25a, #1f9847);
+}
+
+/* Progress Indicator */
+.progress-indicator {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #555555;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 1px 1px #f0f9ff;
+}
+
+/* Add Responsive Design */
+@media (max-width: 768px) {
+  .play-page-container {
+    padding: 20px;
+    margin: 30px 15px;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 12px;
+  }
+}

@@ -14,7 +14,7 @@ const CreateFlashcardPage = () => {
 
   // Handle back button click
   const handleBack = () => {
-    navigate(`/decks/${deck_id}`); // Navigate back to the deck's page
+    navigate(`/deck/${deck_id}`); // Navigate back to the deck's page
   };
 
   // Handle form submission
