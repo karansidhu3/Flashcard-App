@@ -32,6 +32,10 @@ export function DeckPage() {
     navigate(`/deck/${deckId}/create-flashcard`);
   };
 
+  const handlePlayDeck = () => {
+    navigate(`/playgame/${deckId}`);
+  }
+
   return (
     <div className={`deck-page ${isStudyMode ? "study-mode" : "casual-mode"}`}>
       {/* Back Button positioned at the top-left corner */}
@@ -45,7 +49,7 @@ export function DeckPage() {
       </div>
       <div className="deck-buttons">
         {/* Primary Action */}
-        <button className="button play-button">Play Deck</button>
+        <button className="button play-button" onClick={handlePlayDeck}>Play Deck</button>
 
         {/* Grouped Actions */}
         <div className="secondary-buttons">
