@@ -263,3 +263,57 @@ describe('Get Deck API Tests', () => {
   });
 });
 
+describe('Load Flashcards API Tests', () => {
+  it('should return flashcards for a valid deck_id', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({
+      rows: [
+        { card_id: 1, question: 'What is 2+2?', answer: '4', deck_id: 1 },
+        { card_id: 2, question: 'What is the capital of France?', answer: 'Paris', deck_id: 1 },
+      ],
+    });
+
+    const response = await request(app)
+      .post('/api/get-flashcards') // Assuming the endpoint is /api/get-flashcards
+      .send({ deck_id: 1 });
+
+    expect(response.status).toBe(200); // Success
+    expect(response.body).toEqual([
+      { card_id: 1, question: 'What is 2+2?', answer: '4', deck_id: 1 },
+      { card_id: 2, question: 'What is the capital of France?', answer: 'Paris', deck_id: 1 },
+    ]); // Check if the response matches expected output
+  });
+
+  it('should return 404 if no flashcards are found', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({ rows: [] }); // No flashcards found
+
+    const response = await request(app)
+      .post('/api/get-flashcards')
+      .send({ deck_id: 999 }); // Non-existent deck_id
+
+    expect(response.status).toBe(404); // Not Found
+    expect(response.text).toBe('No flashcards found for the deck'); // Proper error message
+  });
+
+  it('should return 400 for missing deck_id', async () => {
+    const response = await request(app)
+      .post('/api/get-flashcards')
+      .send({}); // No deck_id provided
+
+    expect(response.status).toBe(400); // Bad Request
+    expect(response.text).toBe('Deck ID is required'); // Validation error
+  });
+
+  it('should handle database errors gracefully', async () => {
+    const mClient = new Pool();
+    mClient.query.mockRejectedValueOnce(new Error('Database Error')); // Simulate DB error
+
+    const response = await request(app)
+      .post('/api/get-flashcards')
+      .send({ deck_id: 1 });
+
+    expect(response.status).toBe(500); // Internal Server Error
+    expect(response.text).toBe('Error occurred while retrieving flashcards'); // Proper error message
+  });
+});
