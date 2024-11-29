@@ -35,14 +35,12 @@ export function CreateDeckPage() {
         body: JSON.stringify(deckData),
       });
 
-      if (response.status === 201) {
-        const result = await response.json();
-        console.log(result.message);
-
-        // Navigate to the flashcard creation page for the newly created deck
-        navigate(`/deck/${result.deck_id}/create-flashcard`);
+      if (response.ok) {
+        const result = await response.json(); // Parse JSON response
+        console.log(result.message); // Log the success message
+        navigate(`/deck/${result.deck_id}/create-flashcard`); // Navigate to the new deck
       } else {
-        const errorMessage = await response.text();
+        const errorMessage = await response.text(); // Parse error message
         console.error("Failed to create deck:", errorMessage);
         alert("Failed to create deck: " + errorMessage);
       }
