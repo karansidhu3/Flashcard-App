@@ -201,7 +201,7 @@ describe('Delete Deck API Tests', () => {
       .send({}); // No deck_id provided
 
     expect(response.status).toBe(400); // Bad Request status
-    expect(response.body).toEqual({ error: 'deck_id is required' }); // Validation error message
+    expect(response.body).toEqual({ error: 'Deck ID is required' }); // Validation error message
   });
 });
 
