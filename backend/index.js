@@ -89,4 +89,29 @@ app.post('/api/get-decks', async (req, res) => {
   }
 });
 
+app.post('/api/get-flashcards', async (req, res) => {
+  try {
+    const { deck_id } = req.body;
+
+    // Validate input
+    if (!deck_id) {
+      return res.status(400).send('Deck ID is required');
+    }
+
+    // Query the database for flashcards belonging to the given deck
+    const result = await db.query('SELECT * FROM flashcards WHERE deck_id = $1', [deck_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('No flashcards found for the deck');
+    }
+
+    // Return the flashcards
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error retrieving flashcards:', err);
+    res.status(500).send('Error occurred while retrieving flashcards');
+  }
+});
+
+
 module.exports = app; // Export the app for testing
