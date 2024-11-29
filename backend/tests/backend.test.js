@@ -169,6 +169,43 @@ describe('Create Deck API Tests', () => {
   });
 });
 
+//Tests for delete deck
+describe('Delete Deck API Tests', () => {
+  it('should delete the deck with a valid deck_id', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({ rowCount: 1 }); // Simulate successful deletion
+
+    const response = await request(app)
+      .post('/api/delete-deck')
+      .send({ deck_id: 123 });
+
+    expect(response.status).toBe(200); // Success status
+    expect(response.body).toEqual({ message: 'Deck deleted successfully' }); // Proper success message
+  });
+
+  it('should return 404 if the deck does not exist', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({ rowCount: 0 }); // Simulate no rows affected (deck not found)
+
+    const response = await request(app)
+      .post('/api/delete-deck')
+      .send({ deck_id: 999 });
+
+    expect(response.status).toBe(404); // Not Found status
+    expect(response.body).toEqual({ error: 'Deck not found' }); // Proper error message
+  });
+
+  it('should return 400 for missing or invalid deck_id', async () => {
+    const response = await request(app)
+      .post('/api/delete-deck')
+      .send({}); // No deck_id provided
+
+    expect(response.status).toBe(400); // Bad Request status
+    expect(response.body).toEqual({ error: 'deck_id is required' }); // Validation error message
+  });
+});
+
+
 //tests for getting the contents of a sepcific selected deck
 describe('Get Deck API Tests', () => {
   it('should return the deck details for a valid deck_id', async () => {
@@ -225,3 +262,4 @@ describe('Get Deck API Tests', () => {
     expect(response.body).toEqual({ error: 'An error occurred while retrieving the deck' }); // Proper error message
   });
 });
+

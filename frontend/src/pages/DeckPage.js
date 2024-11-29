@@ -56,6 +56,32 @@ export function DeckPage() {
     navigate(`/deck/${deckId}/create-flashcard`);
   };
 
+  // Handler for the Delete Deck button
+  const handleDeleteDeck = async () => {
+    if (window.confirm("Are you sure you want to delete this deck?")) {
+      try {
+        const response = await fetch("/api/delete-deck", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ deck_id: deckId }),
+        });
+
+        if (response.ok) {
+          alert("Deck deleted successfully!");
+          navigate("/homepage"); // Navigate back to homepage
+        } else {
+          const errorMessage = await response.text();
+          alert(`Failed to delete deck: ${errorMessage}`);
+        }
+      } catch (error) {
+        console.error("Error deleting deck:", error);
+        alert("An error occurred while deleting the deck. Please try again.");
+      }
+    }
+  };
+
   return (
     <div className={`deck-page`}>
       {/* Back Button */}
@@ -76,7 +102,17 @@ export function DeckPage() {
           </button>
           <button className="button export-button">Export Deck</button>
         </div>
-        <button className="button delete-button">Delete Deck</button>
+
+        {/* Destructive Action */}
+        <button className="button delete-button" onClick={handleDeleteDeck}>
+          Delete Deck
+        </button>
+
+        {/* Toggle Mode */}
+        <button className="button toggle-button" onClick={toggleMode}>
+          {isStudyMode ? "Switch to Casual Mode" : "Switch to Study Mode"}
+        </button>
+
       </div>
     </div>
   );
