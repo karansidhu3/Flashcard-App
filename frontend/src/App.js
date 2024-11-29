@@ -18,7 +18,7 @@ export default function App() {
         <Route path="/deck/:deckId" element={<ProtectedRoute><DeckPage /></ProtectedRoute>} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/create-deck" element={<ProtectedRoute><CreateDeckPage /></ProtectedRoute>} />
-        <Route path="/deck/:deckId/create-flashcard" element={<ProtectedRoute><CreateFlashcardPage /></ProtectedRoute>} /> {/* New Route */}
+        <Route path="/deck/:deck_id/create-flashcard" element={<ProtectedRoute><CreateFlashcardPage /></ProtectedRoute>} /> {/* New Route */}
       </Routes>
     </BrowserRouter>
   );
