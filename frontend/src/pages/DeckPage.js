@@ -82,6 +82,10 @@ export function DeckPage() {
     }
   };
 
+  const handlePlayDeck = () => {
+    navigate(`/playgame/${deckId}`);
+  }
+
   return (
     <div className={`deck-page`}>
       {/* Back Button */}
@@ -94,7 +98,7 @@ export function DeckPage() {
         <p className="deck-description">{deck.description}</p>
       </div>
       <div className="deck-buttons">
-        <button className="button play-button">Play Deck</button>
+        <button className="button play-button" onClick={handlePlayDeck}>Play Deck</button>
         <div className="secondary-buttons">
           <button className="button edit-button">Edit Flashcards</button>
           <button className="button create-button" onClick={handleCreateFlashcard}>

@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/create-deck" element={<ProtectedRoute><CreateDeckPage /></ProtectedRoute>} />
         <Route path="/deck/:deck_id/create-flashcard" element={<ProtectedRoute><CreateFlashcardPage /></ProtectedRoute>} /> {/* New Route */}
+        <Route path="/playgame/:deckId" element={<ProtectedRoute><PlayPage /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
