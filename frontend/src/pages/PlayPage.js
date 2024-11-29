@@ -17,7 +17,7 @@ export default function PlayPage() {
         const response = await fetch(`/api/get-flashcards`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_id: userId, deck_id: deckId }),
+          body: JSON.stringify({ deck_id: deckId }),
         });
         const data = await response.json();
         setFlashcards(data);
@@ -41,7 +41,7 @@ export default function PlayPage() {
       setCurrentIndex((prev) => prev + 1);
       setIsFlipped(false);
     } else {
-      navigate(`/deckpage/${deckId}`);
+      navigate(`/deck/${deckId}`);
     }
   };
 

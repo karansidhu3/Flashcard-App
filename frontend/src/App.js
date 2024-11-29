@@ -8,6 +8,7 @@ import { SignupPage } from "./pages/SignupPage.js";
 import { CreateDeckPage } from "./pages/CreateDeckPage.js";
 import { CreateFlashcardPage } from "./pages/CreateFlashcardPage.js";
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
+import PlayPage from "./pages/PlayPage.js";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/create-deck" element={<ProtectedRoute><CreateDeckPage /></ProtectedRoute>} />
         <Route path="/deck/:deckId/create-flashcard" element={<ProtectedRoute><CreateFlashcardPage /></ProtectedRoute>} /> {/* New Route */}
+        <Route path="/playgame/:deckId" element={<ProtectedRoute><PlayPage /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
