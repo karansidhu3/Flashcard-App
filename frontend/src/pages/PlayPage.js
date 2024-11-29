@@ -33,7 +33,11 @@ export default function PlayPage() {
   };
 
   const handleTagAsKnown = () => {
-    setKnownCards((prev) => [...prev, flashcards[currentIndex].id]);
+    setKnownCards((prev) =>
+      prev.includes(flashcards[currentIndex].id)
+        ? prev.filter((id) => id !== flashcards[currentIndex].id) // Remove from known
+        : [...prev, flashcards[currentIndex].id] // Add to known
+    );
   };
 
   const handleNext = () => {
@@ -49,22 +53,28 @@ export default function PlayPage() {
     return <div className="play-page-container">Loading flashcards...</div>;
   }
 
-  const currentFlashcard = flashcards[currentIndex];
-
   return (
     <div className="play-page-container">
       <h1 className="play-page-header">Deck: {deckId}</h1>
       <div className="flashcard-container">
+        {knownCards.includes(flashcards[currentIndex].id) && (
+          <div className="known-label">Known</div>
+        )}
         <div className={isFlipped ? "flashcard-answer" : "flashcard-question"}>
-          {isFlipped ? currentFlashcard.answer : currentFlashcard.question}
+          {isFlipped ? flashcards[currentIndex].answer : flashcards[currentIndex].question}
         </div>
       </div>
       <div className="buttons-container">
         <button className="button button-secondary" onClick={handleFlip}>
           {isFlipped ? "Show Question" : "Show Answer"}
         </button>
-        <button className="button button-success" onClick={handleTagAsKnown}>
-          Tag as Known
+        <button
+          className="button button-success"
+          onClick={handleTagAsKnown}
+        >
+          {knownCards.includes(flashcards[currentIndex].id)
+            ? "Tag as Unknown"
+            : "Tag as Known"}
         </button>
         <button className="button button-primary" onClick={handleNext}>
           {currentIndex < flashcards.length - 1 ? "Next" : "Finish"}
@@ -75,4 +85,6 @@ export default function PlayPage() {
       </p>
     </div>
   );
+  
+  
 }
