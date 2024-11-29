@@ -8,6 +8,7 @@ export function DeckPage() {
   const [deck, setDeck] = useState(null); // State for deck data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [isStudyMode, setIsStudyMode] = useState(false);
 
   useEffect(() => {
     // Fetch the selected deck's data from the backend
@@ -85,6 +86,12 @@ export function DeckPage() {
   const handlePlayDeck = () => {
     navigate(`/playgame/${deckId}`);
   }
+
+  const toggleMode = () => {
+    setIsStudyMode(!isStudyMode);
+  };
+
+
 
   return (
     <div className={`deck-page`}>

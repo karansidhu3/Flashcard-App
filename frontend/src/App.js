@@ -8,6 +8,7 @@ import { SignupPage } from "./pages/SignupPage.js";
 import { CreateDeckPage } from "./pages/CreateDeckPage.js";
 import CreateFlashcardPage from "./pages/CreateFlashcardPage.js"; // Import the new component
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
+import PlayPage from "./pages/PlayPage.js";
 
 export default function App() {
   return (
