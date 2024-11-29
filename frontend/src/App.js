@@ -6,7 +6,7 @@ import { HomePage } from "./pages/HomePage.js";
 import { DeckPage } from "./pages/DeckPage.js";
 import { SignupPage } from "./pages/SignupPage.js";
 import { CreateDeckPage } from "./pages/CreateDeckPage.js";
-import { CreateFlashcardPage } from "./pages/CreateFlashcardPage.js";
+import CreateFlashcardPage from "./pages/CreateFlashcardPage.js"; // Import the new component
 import { ProtectedRoute } from "./components/ProtectedRoute.js";
 
 export default function App() {
