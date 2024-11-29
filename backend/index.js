@@ -179,6 +179,7 @@ app.post('/api/create-deck', async (req, res) => {
 // post for delete deck
 app.post('/api/delete-deck', async (req, res) => {
 
+  try {
     // Attempt to delete the deck from the database
     const query = 'DELETE FROM decks WHERE deck_id = $1';
     const result = await db.query(query, [deck_id]);
