@@ -111,4 +111,32 @@ app.post('/api/create-deck', async (req, res) => {
   }
 });
 
+// post for delete deck
+app.post('/api/delete-deck', async (req, res) => {
+  const { deck_id } = req.body;
+
+  // Validate input
+  if (!deck_id) {
+    return res.status(400).json({ error: 'deck_id is required' });
+  }
+
+  try {
+    // Attempt to delete the deck from the database
+    const query = 'DELETE FROM decks WHERE deck_id = $1';
+    const result = await db.query(query, [deck_id]);
+
+    // Check if the deck was found and deleted
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Deck not found' });
+    }
+
+    // Respond with success if the deck was deleted
+    res.status(200).json({ message: 'Deck deleted successfully' });
+  } catch (error) {
+    console.error('Database Error:', error);
+    res.status(500).json({ error: 'An error occurred while deleting the deck' });
+  }
+});
+
+
 module.exports = app; // Export the app for testing
