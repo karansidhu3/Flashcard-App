@@ -100,11 +100,11 @@ app.post('/api/create-deck', async (req, res) => {
 
   try {
     // Insert the new deck into the database, including the description
-    const query = 'INSERT INTO decks (user_id, deck_name, description) VALUES ($1, $2, $3)';
-    await db.query(query, [user_id, deck_name, description]);
-
-    // Respond with success
-    res.status(201).send('Deck created successfully');
+    const query = 'INSERT INTO decks (user_id, deck_name, description) VALUES ($1, $2, $3) RETURNING deck_id';
+    const result = await db.query(query, [user_id, deck_name, description]);
+    
+    res.status(201).json({ message: 'Deck created successfully', deck_id: result.rows[0].deck_id });
+    
   } catch (error) {
     console.error('Database Error:', error);
     res.status(500).send('Error occurred while creating deck');

@@ -132,14 +132,19 @@ describe('Load Users Decks API Tests', () => {
 describe('Create Deck API Tests', () => {
   it('should create a new deck with valid data', async () => {
     const mClient = new Pool();
-    mClient.query.mockResolvedValueOnce(); // Simulate successful deck creation
-
+    mClient.query.mockResolvedValueOnce({
+      rows: [{ deck_id: 1 }], // Simulate successful deck creation with returned deck_id
+    });
+  
     const response = await request(app)
       .post('/api/create-deck')
       .send({ user_id: 123, deck_name: 'New Deck' });
-
+  
     expect(response.status).toBe(201); // Created
-    expect(response.text).toBe('Deck created successfully'); // Success message check
+    expect(response.body).toEqual({
+      message: 'Deck created successfully',
+      deck_id: 1,
+    }); // Check JSON response structure
   });
 
   it('should return 400 for missing fields', async () => {
