@@ -252,4 +252,26 @@ app.post('/api/get-flashcards', async (req, res) => {
   }
 });
 
+// To update flashcards
+app.put('/api/flashcards/:flashcardId', async (req, res) => {
+  const { flashcardId } = req.params;
+  const { question, answer, is_known } = req.body;
+
+  try {
+      const result = await pool.query(
+          'UPDATE flashcards SET question = $1, answer = $2, is_known = $3 WHERE flashcard_id = $4',
+          [question, answer, is_known, flashcardId]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).send('Flashcard not found');
+      }
+
+      res.send('Flashcard updated successfully');
+  } catch (error) {
+      console.error('Error updating flashcard:', error);
+      res.status(500).send('Server error');
+  }
+});
+
 module.exports = app; // Export the app for testing
