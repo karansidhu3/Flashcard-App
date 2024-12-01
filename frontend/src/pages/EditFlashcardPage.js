@@ -34,6 +34,11 @@ const EditFlashcard = () => {
   };
 
   const handleSave = async (flashcard) => {
+    if (!flashcard.question.trim() || !flashcard.answer.trim()) {
+        alert("Question and Answer fields cannot be blank!");
+        return;
+      }
+    
     try {
       const response = await fetch(`/api/flashcards/${flashcard.flashcard_id}`, {
         method: "PUT",
