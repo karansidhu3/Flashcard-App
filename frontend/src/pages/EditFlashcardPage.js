@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles/EditFlashcardPage.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 
 const EditFlashcard = () => {
   const [flashcards, setFlashcards] = useState([]);
   const { deck_id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFlashcards = async () => {
@@ -57,8 +58,15 @@ const EditFlashcard = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate(-1); // Navigate to the previous page
+  };
+
   return (
     <div className="edit-page">
+    <button className="back-button" onClick={handleBack}>
+        Back
+      </button>
       <h2 className="edit-header">Edit Flashcards</h2>
       <div className="flashcard-list">
         {flashcards.map((flashcard) => (
