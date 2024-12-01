@@ -258,7 +258,7 @@ app.put('/api/flashcards/:flashcardId', async (req, res) => {
   const { question, answer, is_known } = req.body;
 
   try {
-      const result = await pool.query(
+      const result = await db.query(
           'UPDATE flashcards SET question = $1, answer = $2, is_known = $3 WHERE flashcard_id = $4',
           [question, answer, is_known, flashcardId]
       );

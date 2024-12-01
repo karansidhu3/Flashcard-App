@@ -1,66 +1,98 @@
 import React, { useState, useEffect } from "react";
+import "./styles/EditFlashcardPage.css";
+import { useParams } from "react-router-dom";
 
-const EditFlashcard = ({ flashcardId, onSave, onCancel }) => {
-  const [front, setFront] = useState("");
-  const [back, setBack] = useState("");
+const EditFlashcard = () => {
+  const [flashcards, setFlashcards] = useState([]);
+  const { deck_id } = useParams();
 
-  // Fetch the flashcard details for editing when component mounts
   useEffect(() => {
-    // Simulate fetching data (replace with actual API call)
-    const fetchFlashcard = async () => {
-      const response = await fetch(`/api/deck/${deck_id}/edit-flashcard`);
-      const data = await response.json();
-      setFront(data.front);
-      setBack(data.back);
+    const fetchFlashcards = async () => {
+      try {
+        const response = await fetch(`/api/get-flashcards`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ deck_id }),
+        });
+        const data = await response.json();
+        setFlashcards(data);
+      } catch (error) {
+        console.error("Error fetching flashcards:", error);
+      }
     };
 
-    fetchFlashcard();
-  }, [flashcardId]);
+    fetchFlashcards();
+  }, [deck_id]);
 
-  const handleSave = () => {
-    onSave({ id: flashcardId, front, back });
+  const handleInputChange = (id, field, value) => {
+    setFlashcards((prevFlashcards) =>
+      prevFlashcards.map((flashcard) =>
+        flashcard.flashcard_id === id ? { ...flashcard, [field]: value } : flashcard
+      )
+    );
+  };
+
+  const handleSave = async (flashcard) => {
+    try {
+      const response = await fetch(`/api/flashcards/${flashcard.flashcard_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: flashcard.question,
+          answer: flashcard.answer,
+          is_known: flashcard.is_known,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save flashcard");
+      }
+
+      alert("Flashcard saved successfully!");
+    } catch (error) {
+      console.error("Error saving flashcard:", error);
+      alert("Failed to save flashcard. Please try again.");
+    }
   };
 
   return (
-    <div className="edit-flashcard">
-      <h2>Edit Flashcard</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
-      >
-        <div className="form-group">
-          <label htmlFor="front">Front:</label>
-          <textarea
-            id="front"
-            value={front}
-            onChange={(e) => setFront(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="back">Back:</label>
-          <textarea
-            id="back"
-            value={back}
-            onChange={(e) => setBack(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="btn btn-save">
-            Save
-          </button>
-          <button
-            type="button"
-            className="btn btn-cancel"
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+    <div className="edit-page">
+      <h2 className="edit-header">Edit Flashcards</h2>
+      <div className="flashcard-list">
+        {flashcards.map((flashcard) => (
+          <div key={flashcard.flashcard_id} className="flashcard-container">
+            <h3>Flashcard {flashcard.flashcard_id}</h3>
+            <div className="form-group">
+              <label htmlFor={`question-${flashcard.flashcard_id}`}>Question:</label>
+              <textarea
+                id={`question-${flashcard.flashcard_id}`}
+                value={flashcard.question}
+                onChange={(e) =>
+                  handleInputChange(flashcard.flashcard_id, "question", e.target.value)
+                }
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor={`answer-${flashcard.flashcard_id}`}>Answer:</label>
+              <textarea
+                id={`answer-${flashcard.flashcard_id}`}
+                value={flashcard.answer}
+                onChange={(e) =>
+                  handleInputChange(flashcard.flashcard_id, "answer", e.target.value)
+                }
+              />
+            </div>
+            <button
+              className="save-button"
+              onClick={() => handleSave(flashcard)}
+            >
+              Save
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
