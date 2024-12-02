@@ -213,25 +213,7 @@ app.post('/api/get-deck', async (req, res) => {
 
   try {
     // Query the database for the specific deck
-    const query = `
-    SELECT 
-      d.deck_id, 
-      d.user_id, 
-      d.deck_name, 
-      d.description, 
-      d.is_public, 
-      d.created_at
-    FROM 
-      decks d
-    LEFT JOIN 
-      shared_decks sd 
-    ON 
-      d.deck_id = sd.deck_id
-    WHERE 
-      d.user_id = $1
-      OR sd.user_id = $1
-      OR d.is_public = true;
-    `;
+    const query = 'SELECT * FROM decks WHERE deck_id = $1';
     const result = await db.query(query, [deck_id]);
 
     if (result.rows.length === 0) {
@@ -356,7 +338,7 @@ app.post('/api/get-user-decks', async (req, res) => {
       d.user_id = $1
       OR sd.user_id = $1
       OR d.is_public = true;
-    `;
+  `;
 
     const result = await db.query(query, [user_id]);
 
