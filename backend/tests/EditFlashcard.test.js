@@ -18,6 +18,22 @@ describe('Update Flashcards API Tests', () => {
     jest.clearAllMocks();
   });
 
+  it('should delete a flashcard successfully', async () => {
+    const flashcardId = 1;
+
+    // Mock the query to simulate a successful deletion
+    mockQuery.mockResolvedValueOnce({ rowCount: 1 });
+
+    const response = await request(app).delete(`/api/flashcards/delete-flashcard/${flashcardId}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.message).toBe('Flashcard deleted successfully');
+    expect(mockQuery).toHaveBeenCalledWith(
+      'DELETE FROM flashcards WHERE flashcard_id = $1',
+      [String(flashcardId)]
+    );
+  });
+  
   it('should update a flashcard successfully', async () => {
     const flashcardId = 1;
     const updatedData = {
