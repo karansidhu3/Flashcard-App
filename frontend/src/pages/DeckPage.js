@@ -1,3 +1,4 @@
+// src/pages/DeckPage.js
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles/DeckPage.css";
@@ -94,10 +95,12 @@ export function DeckPage() {
     setIsStudyMode(!isStudyMode);
   };
 
-
+  const handleShareDeck = () => {
+    navigate(`/deck/${deckId}/share`);
+  };
 
   return (
-    <div className={`deck-page`}>
+    <div className={`deck-page ${isStudyMode ? 'study-mode' : ''}`}>
       {/* Back Button */}
       <button className="button back-button" onClick={handleBack}>
         &larr; Back
@@ -114,7 +117,7 @@ export function DeckPage() {
           <button className="button create-button" onClick={handleCreateFlashcard}>
             Create Flashcard
           </button>
-          <button className="button export-button">Export Deck</button>
+          <button className="button share-button" onClick={handleShareDeck}>Share Deck</button>
         </div>
 
         {/* Destructive Action */}

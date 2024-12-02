@@ -13,6 +13,7 @@ CREATE TABLE decks (
     user_id INT NOT NULL,
     description TEXT NOT NULL,
     deck_name VARCHAR(255) NOT NULL,
+    is_public BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
@@ -26,6 +27,14 @@ CREATE TABLE flashcards (
     is_known BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id) ON DELETE CASCADE
+);
+
+CREATE TABLE shared_decks (
+    id SERIAL PRIMARY KEY,
+    deck_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (deck_id) REFERENCES decks(deck_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 -- Insert Users
