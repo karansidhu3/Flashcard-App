@@ -3,6 +3,19 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles/ShareDeck.css";
 
+
+export function validateShareDeck(shareOption, username) {
+  if (!shareOption) {
+    return { success: false, error: "Please select a sharing option." };
+  }
+  if (shareOption === "user" && !username.trim()) {
+    return { success: false, error: "Please enter a username to share with." };
+  }
+  return { success: true };
+}
+
+
+
 const ShareDeck = () => {
   const { deckId } = useParams(); // Get deckId from URL params
   const navigate = useNavigate();

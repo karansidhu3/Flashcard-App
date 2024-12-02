@@ -252,4 +252,40 @@ app.post('/api/get-flashcards', async (req, res) => {
   }
 });
 
+app.post('/api/share-deck-with-user', async (req, res) => {
+  const { deck_id, username } = req.body;
+  if (!deck_id || !username) {
+      return res.status(400).json({ error: "Deck ID and username are required" });
+  }
+
+  try {
+      const userResult = await db.query('SELECT user_id FROM users WHERE username = $1', [username]);
+      if (userResult.rows.length === 0) {
+          return res.status(404).json({ error: "User not found" });
+      }
+      const userId = userResult.rows[0].user_id;
+
+      await db.query('INSERT INTO shared_decks (deck_id, user_id) VALUES ($1, $2)', [deck_id, userId]);
+      res.status(200).json({ message: `Deck shared with ${username}` });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to share deck" });
+  }
+});
+
+app.post('/api/make-deck-public', async (req, res) => {
+  const { deck_id } = req.body;
+  if (!deck_id) {
+      return res.status(400).json({ error: "Deck ID is required" });
+  }
+
+  try {
+      await db.query('UPDATE decks SET is_public = true WHERE deck_id = $1', [deck_id]);
+      res.status(200).json({ message: "Deck is now public" });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Failed to make deck public" });
+  }
+});
+
 module.exports = app; // Export the app for testing
