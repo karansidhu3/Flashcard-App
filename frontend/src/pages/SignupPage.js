@@ -47,7 +47,7 @@ export function SignupPage() {
 
       if (response.ok) {
         alert('Signup successful!');
-        navigate('/login'); // Redirect to login page after successful signup
+        navigate('/'); // Redirect to login page after successful signup
       } else {
         alert('Signup failed');
       }
