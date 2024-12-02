@@ -94,6 +94,24 @@
     transform: translateY(-2px);
 }
 
+.delete-button {
+    padding: 8px 15px;
+    width: auto;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #ed1919;
+    color: white;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #dd5555;
+    transform: translateY(-2px);
+}
+
 .back-button {
     position: absolute;
     top: 20px;
