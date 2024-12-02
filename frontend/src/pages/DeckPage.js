@@ -86,6 +86,9 @@ export function DeckPage() {
   const handlePlayDeck = () => {
     navigate(`/playgame/${deckId}`);
   }
+  const handleEditFlashcard = () => {
+    navigate(`/deck/${deckId}/edit-flashcard`);
+  }
 
   const toggleMode = () => {
     setIsStudyMode(!isStudyMode);
@@ -107,7 +110,7 @@ export function DeckPage() {
       <div className="deck-buttons">
         <button className="button play-button" onClick={handlePlayDeck}>Play Deck</button>
         <div className="secondary-buttons">
-          <button className="button edit-button">Edit Flashcards</button>
+          <button className="button edit-button" onClick={handleEditFlashcard}>Edit Flashcards</button>
           <button className="button create-button" onClick={handleCreateFlashcard}>
             Create Flashcard
           </button>
