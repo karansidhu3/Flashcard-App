@@ -128,7 +128,7 @@ const ShareDeck = () => {
         {success && <p className="success-message">{success}</p>}
         <div className="form-buttons">
           <button type="submit" className="button submit-button">Submit</button>
-          <button type="button" className="button cancel-button" onClick={handleCancel}>Cancel</button>
+          <button type="button" className="button cancel-button" onClick={handleCancel}>Back</button>
         </div>
       </form>
     </div>

@@ -310,4 +310,49 @@ app.put('/api/flashcards/:flashcardId', async (req, res) => {
   }
 });
 
+app.post('/api/get-user-decks', async (req, res) => {
+  const { user_id } = req.body;
+
+  // Validate input
+  if (!user_id) {
+    return res.status(400).json({ error: 'user_id is required' });
+  }
+
+  try {
+    // Query to fetch all decks (owned and shared)
+    const query = `
+    SELECT 
+      d.deck_id, 
+      d.user_id, 
+      d.deck_name, 
+      d.description, 
+      d.is_public, 
+      d.created_at
+    FROM 
+      decks d
+    LEFT JOIN 
+      shared_decks sd 
+    ON 
+      d.deck_id = sd.deck_id
+    WHERE 
+      d.user_id = $1
+      OR sd.user_id = $1
+      OR d.is_public = true;
+  `;
+
+    const result = await db.query(query, [user_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'No decks found for the user' });
+    }
+
+    // Return the decks
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Error fetching user decks:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving decks' });
+  }
+});
+
+
 module.exports = app; // Export the app for testing

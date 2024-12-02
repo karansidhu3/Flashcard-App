@@ -317,3 +317,58 @@ describe('Load Flashcards API Tests', () => {
     expect(response.text).toBe('Error occurred while retrieving flashcards'); // Proper error message
   });
 });
+
+describe('Get User Decks API Tests', () => {
+  it('should return all decks (owned, shared, or public) for a valid user_id', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({
+      rows: [
+        { deck_id: 1, user_id: 123, deck_name: 'Math', description: 'Math deck', is_public: false, created_at: '2024-01-01' },
+        { deck_id: 2, user_id: 456, deck_name: 'Science', description: 'Science deck', is_public: true, created_at: '2024-01-02' },
+      ],
+    });
+
+    const response = await request(app)
+      .post('/api/get-user-decks')
+      .send({ user_id: 123 });
+
+    expect(response.status).toBe(200); // Success
+    expect(response.body).toEqual([
+      { deck_id: 1, user_id: 123, deck_name: 'Math', description: 'Math deck', is_public: false, created_at: '2024-01-01' },
+      { deck_id: 2, user_id: 456, deck_name: 'Science', description: 'Science deck', is_public: true, created_at: '2024-01-02' },
+    ]); // Match exact structure of expected response
+  });
+
+  it('should return 404 if no decks are found for the user', async () => {
+    const mClient = new Pool();
+    mClient.query.mockResolvedValueOnce({ rows: [] }); // Simulate no decks found
+
+    const response = await request(app)
+      .post('/api/get-user-decks')
+      .send({ user_id: 456 });
+
+    expect(response.status).toBe(404); // Not Found
+    expect(response.body).toEqual({ error: 'No decks found for the user' }); // Proper error message
+  });
+
+  it('should return 400 for missing user_id', async () => {
+    const response = await request(app)
+      .post('/api/get-user-decks')
+      .send({}); // No user_id provided
+
+    expect(response.status).toBe(400); // Bad Request
+    expect(response.body).toEqual({ error: 'user_id is required' }); // Validation error
+  });
+
+  it('should handle database errors gracefully', async () => {
+    const mClient = new Pool();
+    mClient.query.mockRejectedValueOnce(new Error('Database Error')); // Simulate DB error
+
+    const response = await request(app)
+      .post('/api/get-user-decks')
+      .send({ user_id: 123 });
+
+    expect(response.status).toBe(500); // Internal Server Error
+    expect(response.body).toEqual({ error: 'An error occurred while retrieving decks' }); // Proper error message
+  });
+});
