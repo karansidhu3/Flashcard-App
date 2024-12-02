@@ -8,7 +8,7 @@ export function HomePageBody({ onCreateDeck }) {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
-    fetch("/api/get-decks", {
+    fetch("/api/get-user-decks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user_id: userId }),
