@@ -33,6 +33,22 @@ const EditFlashcard = () => {
     );
   };
 
+  const handleDelete = async (flashcard) => {
+    try {
+      const response = await fetch(`/api/flashcards/delete-flashcard/${flashcard.flashcard_id}`, {
+        method: "DELETE",
+      });
+        const data = await response.json();
+        setFlashcards((prevFlashcards) =>
+        prevFlashcards.filter((fc) => fc.flashcard_id !== flashcard.flashcard_id)
+      );
+      alert("Flashcard deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting flashcard:", error);
+      alert("Failed to delete flashcard. Please try again.");
+    }
+  };
+  
   const handleSave = async (flashcard) => {
     if (!flashcard.question.trim() || !flashcard.answer.trim()) {
         alert("Question and Answer fields cannot be blank!");
@@ -102,6 +118,12 @@ const EditFlashcard = () => {
               onClick={() => handleSave(flashcard)}
             >
               Save
+            </button>
+            <button
+              className="delete-button"
+              onClick={() => handleDelete(flashcard)}
+            >
+              Delete
             </button>
           </div>
         ))}

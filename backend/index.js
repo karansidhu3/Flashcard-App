@@ -310,4 +310,25 @@ app.put('/api/flashcards/:flashcardId', async (req, res) => {
   }
 });
 
+app.delete('/api/flashcards/delete-flashcard/:flashcardId', async (req, res) => {
+  const { flashcardId } = req.params;
+
+  try {
+    const result = await db.query(
+      'DELETE FROM flashcards WHERE flashcard_id = $1',
+      [flashcardId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Flashcard not found' });
+    }
+
+    res.status(200).json({ message: 'Flashcard deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting flashcard:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 module.exports = app; // Export the app for testing
