@@ -252,6 +252,7 @@ app.post('/api/get-flashcards', async (req, res) => {
   }
 });
 
+
 app.post('/api/share-deck-with-user', async (req, res) => {
   const { deck_id, username } = req.body;
   if (!deck_id || !username) {
@@ -285,6 +286,27 @@ app.post('/api/make-deck-public', async (req, res) => {
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Failed to make deck public" });
+  }
+});
+// To update flashcards
+app.put('/api/flashcards/:flashcardId', async (req, res) => {
+  const { flashcardId } = req.params;
+  const { question, answer, is_known } = req.body;
+
+  try {
+      const result = await db.query(
+          'UPDATE flashcards SET question = $1, answer = $2, is_known = $3 WHERE flashcard_id = $4',
+          [question, answer, is_known, flashcardId]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).send('Flashcard not found');
+      }
+
+      res.send('Flashcard updated successfully');
+  } catch (error) {
+      console.error('Error updating flashcard:', error);
+      res.status(500).send('Server error');
   }
 });
 
