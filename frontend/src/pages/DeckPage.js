@@ -9,7 +9,6 @@ export function DeckPage() {
   const [deck, setDeck] = useState(null); // State for deck data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
-  const [isStudyMode, setIsStudyMode] = useState(false);
 
   useEffect(() => {
     // Fetch the selected deck's data from the backend
@@ -87,20 +86,17 @@ export function DeckPage() {
   const handlePlayDeck = () => {
     navigate(`/playgame/${deckId}`);
   }
+
   const handleEditFlashcard = () => {
     navigate(`/deck/${deckId}/edit-flashcard`);
   }
-
-  const toggleMode = () => {
-    setIsStudyMode(!isStudyMode);
-  };
 
   const handleShareDeck = () => {
     navigate(`/deck/${deckId}/share`);
   };
 
   return (
-    <div className={`deck-page ${isStudyMode ? 'study-mode' : ''}`}>
+    <div>
       {/* Back Button */}
       <button className="button back-button" onClick={handleBack}>
         &larr; Back
@@ -124,12 +120,6 @@ export function DeckPage() {
         <button className="button delete-button" onClick={handleDeleteDeck}>
           Delete Deck
         </button>
-
-        {/* Toggle Mode */}
-        <button className="button toggle-button" onClick={toggleMode}>
-          {isStudyMode ? "Switch to Casual Mode" : "Switch to Study Mode"}
-        </button>
-
       </div>
     </div>
   );

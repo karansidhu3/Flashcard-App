@@ -7,9 +7,11 @@ export default function PlayPage() {
   const navigate = useNavigate();
 
   const [flashcards, setFlashcards] = useState([]);
+  const [originalOrder, setOriginalOrder] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [knownCards, setKnownCards] = useState([]);
+  const [isShuffled, setIsShuffled] = useState(false);
 
   useEffect(() => {
     async function fetchFlashcards() {
@@ -21,6 +23,7 @@ export default function PlayPage() {
         });
         const data = await response.json();
         setFlashcards(data);
+        setOriginalOrder(data);
       } catch (error) {
         console.error("Error fetching flashcards:", error);
       }
@@ -39,6 +42,22 @@ export default function PlayPage() {
         : [...prev, flashcards[currentIndex].id] // Add to known
     );
   };
+
+  const handleShuffle = () => {
+    if (isShuffled){
+      setFlashcards(originalOrder);
+      setCurrentIndex(0);
+      setIsFlipped(false);
+      setIsShuffled(false);
+    }
+    else {
+      const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
+      setFlashcards(shuffled);
+      setCurrentIndex(0);
+      setIsFlipped(false);
+      setIsShuffled(true);
+    }
+  }
 
   const handleNext = () => {
     if (currentIndex < flashcards.length - 1) {
@@ -65,6 +84,9 @@ export default function PlayPage() {
         </div>
       </div>
       <div className="buttons-container">
+        <button className="button button-toggle" onClick={handleShuffle}>
+          {isShuffled ? "Unshuffle" : "Shuffle"}
+        </button>
         <button className="button button-secondary" onClick={handleFlip}>
           {isFlipped ? "Show Question" : "Show Answer"}
         </button>

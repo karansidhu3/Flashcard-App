@@ -103,6 +103,11 @@
   color: white;
 }
 
+.button-toggle {
+  background: linear-gradient(135deg, #ffdb39, #ffae39);
+  color: white;
+}
+
 .button-primary:hover {
   background: linear-gradient(135deg, #3a6edc, #205acc);
 }
