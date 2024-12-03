@@ -1,53 +1,58 @@
-# Tasks this Cycle (With Contributors)
+# Milestone 6
 
-## Loading Decks by User  
+## Burndown Chart
+![Burn Down Chart for Milestone 6](burndown6.png)
+
+## Tasks this Cycle (With Contributors)
+
+### Loading Decks by User  
 **PR#52**  
 BranchName: `loadingDecks`
 
-## Feature/Create Deck  
+### Feature/Create Deck  
 **PR#54**  
 BranchName: `Create-Deck`
 
-## Feature/Create Flashcard  
+### Feature/Create Flashcard  
 **PR#58, PR#64**  
 BranchName: `createFlashcard-routes`  
 BranchName: `hotfix/create-flashcard`
 
-## Feature/Deck Deletion  
+### Feature/Deck Deletion  
 **PR#61**  
 BranchName: `feature-deck-deletion`
 
-## Feature/Deck Overview  
+### Feature/Deck Overview  
 **PR#63**  
 BranchName: `feature-deck-overview`
 
-## Feature/Play Deck  
+### Feature/Play Deck  
 **PR#70**  
 BranchName: `playDeck`
 
-## Feature/Edit Flashcard  
+### Feature/Edit Flashcard  
 **PR#71**  
 BranchName: `feature/edit-flashcards`
 
-## Feature/Share Flashcard  
+### Feature/Share Flashcard  
 **PR#72**  
 BranchName: `ShareFlashcardFrontend`
 
-## Bug Fixes  
+### Bug Fixes  
 **PR#73**  
 BranchName: `bug-fixes`
 
-## Feature/Edit Flashcard Delete  
+### Feature/Edit Flashcard Delete  
 **PR#75**  
 BranchName: `feature/delete-button`
 
-## Feature/Shuffled Cards  
+### Feature/Shuffled Cards  
 **PR#76**  
 BranchName: `feature/study-shufflemode`
 
 ---
 
-# Summary
+## Summary
 
 This week, the project has seen significant progress with the implementation of multiple new features and bug fixes. We’ve successfully added functionality to load decks by user, create and delete decks, and provide a detailed deck overview. Flashcard-specific features, including creation, editing, sharing, and a shuffle mode for studying, have also been integrated.  
 
@@ -55,7 +60,7 @@ Additionally, a play deck feature was implemented, and several critical bugs wer
 
 ---
 
-# Summary of Completed Tasks
+## Summary of Completed Tasks
 
 ### Loading Decks by User  
 **PR#52**:  
@@ -152,13 +157,13 @@ Additionally, a play deck feature was implemented, and several critical bugs wer
 
 ---
 
-# Comments on the Process  
+## Comments on the Process  
 
 In this milestone, the team demonstrated a full grasp of the project requirements, system architecture, and development language, enabling us to catch up and complete over 95% of the project's functionality. This shared understanding not only accelerated development but also improved the PR review process, as everyone became more proficient in evaluating code quality and adhering to the established workflows. The combined technical fluency and streamlined collaboration have brought us closer than ever to project completion.
 
 ---
 
-# Release Candidate  
+## Release Candidate  
 
 **Release:** Pushed to `Release-2`
 
