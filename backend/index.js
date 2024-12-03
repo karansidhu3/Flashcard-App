@@ -328,6 +328,8 @@ app.delete('/api/flashcards/delete-flashcard/:flashcardId', async (req, res) => 
   } catch (error) {
     console.error('Error deleting flashcard:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
 
 app.post('/api/get-user-decks', async (req, res) => {
   const { user_id } = req.body;
