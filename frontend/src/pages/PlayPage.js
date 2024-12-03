@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./styles/PlayPage.css";
+import { response } from "../../../backend";
 
 export default function PlayPage() {
   const { deckId } = useParams();
@@ -35,14 +36,34 @@ export default function PlayPage() {
     setIsFlipped((prev) => !prev);
   };
 
+
+
   const handleTagAsKnown = () => {
+    const flashcard_id = useParams();
+    const isKnown = knownCards.includes(currentFlashcardId);
+  
     setKnownCards((prev) =>
       prev.includes(flashcards[currentIndex].id)
         ? prev.filter((id) => id !== flashcards[currentIndex].id) // Remove from known
         : [...prev, flashcards[currentIndex].id] // Add to known
     );
-  };
 
+    async function setAsKnown(){
+      try{
+        const response = await fetch(`api/set-is-known/${flashcard_id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            flashcard_id: currentFlashcardId,
+            is_known: !isCurrentlyKnown,
+          }),
+        });
+      } catch (error) {
+        console.error("Error updating flashcard status:", error);
+      }
+    }
+  };
+  
   const handleShuffle = () => {
     if (isShuffled){
       setFlashcards(originalOrder);
