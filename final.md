@@ -1,5 +1,4 @@
 # Final Report: DROP TABLE Students
-### Team Members: Ian Downing, Milan Bertolutti, Karanveer Siduh, Liam Towes-Thessian
 
 ### [Video Walkthrough](https://youtu.be/PN8m_HE0cKs)
 ### Final Release Branch: `Release_3`
