@@ -103,7 +103,35 @@ We implemented manual testing and automated testing using Jest and Supertest.
 - **White Box Testing**  
   This is something we chose not to add to our project due to scope. Since we were not deploying the project, things like coverage seemed a little extra.  
 
-#### Insert Testing plan from Milestone 6 when converting to markdown.
+##### Testing plan:
+| **Subcategory**           | **Test Name**                                  | **Description**                                                                 | **Status**  |
+|----------------------------|-----------------------------------------------|---------------------------------------------------------------------------------|-------------|
+| **Backend API - Login**    | Should fail login with invalid credentials    | Verifies login fails for incorrect credentials.                                 | Passing     |
+|                            | Should succeed with valid credentials         | Verifies login succeeds for correct credentials.                                | Passing     |
+| **Backend API - Signup**   | Should create a new user with valid data      | Tests successful user creation with valid details.                              | Passing     |
+|                            | Should return 400 for missing fields          | Ensures error is returned when required fields are missing.                     | Passing     |
+|                            | Should handle database errors gracefully      | Checks proper error handling during database failures.                          | Passing     |
+| **Load Decks API**         | Should return decks for a valid user ID       | Verifies retrieval of user decks with valid user ID.                            | Passing     |
+|                            | Should return 404 if no decks are found       | Ensures appropriate response for non-existent decks.                            | Passing     |
+|                            | Should return 400 for missing user ID         | Tests validation error when user ID is omitted.                                 | Passing     |
+|                            | Should handle database errors gracefully      | Verifies error handling for database issues during deck retrieval.              | Passing     |
+| **Create Deck API**        | Should create a new deck with valid data      | Confirms successful deck creation with proper input.                            | Passing     |
+|                            | Should return 400 for missing fields          | Validates error for incomplete deck creation input.                             | Passing     |
+|                            | Should handle database errors gracefully      | Ensures robust error handling for database failures during deck creation.       | Passing     |
+| **Delete Deck API**        | Should delete the deck with valid deck ID     | Tests successful deletion of a deck using valid ID.                             | Passing     |
+|                            | Should return 404 if deck does not exist      | Validates error response when the deck to delete is not found.                  | Passing     |
+|                            | Should return 400 for missing or invalid ID   | Ensures error for invalid or missing deck ID.                                   | Passing     |
+| **Flashcard API**          | Should create a new flashcard with valid data | Verifies creation of flashcard with correct data.                               | Passing     |
+|                            | Should return 400 if question or answer is missing | Checks validation for incomplete flashcard data.                                | Passing     |
+|                            | Should return 500 if deck does not exist      | Ensures appropriate error when trying to add flashcard to non-existent deck.    | Passing     |
+|                            | Should update a flashcard successfully        | Verifies update operation for a flashcard.                                      | Passing     |
+|                            | Should delete a flashcard successfully        | Confirms flashcard deletion functionality.                                      | Passing     |
+|                            | Should return 404 if flashcard is not found   | Validates error for operations on a non-existent flashcard.                     | Passing     |
+| **Sharing API**            | POST /api/share-deck-with-user - Missing params | Checks error handling for missing sharing parameters.                          | Passing     |
+|                            | POST /api/make-deck-public - Missing deck ID  | Ensures validation error for missing deck ID during public sharing.             | Passing     |
+| **Validation Functions**   | validateShareDeck - No sharing option selected | Tests error handling for missing sharing option input.                          | Passing     |
+|                            | validateSignup - Missing fields               | Checks error for incomplete signup data.                                        | Passing     |
+|                            | validateSignup - Password too short           | Ensures proper validation for short passwords.                                  | Passing     |
 
 
 ### How did your branching workflow work for the team? Were you successful in properly reviewing the code before merging as a team?
