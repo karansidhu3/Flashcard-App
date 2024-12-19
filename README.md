@@ -1,4 +1,4 @@
-# Final Report: DROP TABLE Students
+# Final Report
 
 ### [Video Walkthrough](https://youtu.be/PN8m_HE0cKs)
 ### Final Release Branch: `Release-3`
